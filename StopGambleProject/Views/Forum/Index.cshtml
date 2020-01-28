@@ -8,11 +8,11 @@
             {
                 <tr>
                     <td>
-                        @forum.Name
+                        <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
                     </td>
                     <td>
                         @forum.Description
-                 s   </td>
+                    </td>
                 </tr>
             }
         

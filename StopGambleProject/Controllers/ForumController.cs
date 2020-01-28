@@ -8,6 +8,7 @@ namespace StopGambleProject.Controllers
     public class ForumController : Controller
     {
         private readonly IForum _forumService;
+        private readonly IPost _postService;
 
         public ForumController(IForum forumService)
         {
@@ -30,6 +31,15 @@ namespace StopGambleProject.Controllers
             };
 
             return View(model);
+        }
+
+        public IActionResult Topic(int id)
+        {
+            var forums = _forumService.GetById(id);
+            var posts = _postService.GetFilteredPosts(id);
+            
+
+            return View();
         }
     }
 }
