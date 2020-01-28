@@ -1,0 +1,25 @@
+﻿@model StopGambleProject.Models.Forum.ForumIndexModel
+
+    <h1>Forum List</h1>
+
+<table class="table table-hover" id="forumIndexTable">
+    <tbody>
+            @foreach (var forum in Model.ForumList)
+            {
+                <tr>
+                    <td>
+                        @forum.Name
+                    </td>
+                    <td>
+                        @forum.Description
+                 s   </td>
+                </tr>
+            }
+        
+    </tbody>
+</table>
+
+
+
+
+

@@ -13,6 +13,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Project.Data.Models;
+using Project.Data;
+using Project.Service;
 
 namespace StopGambleProject
 {
@@ -40,6 +42,8 @@ namespace StopGambleProject
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddScoped<IForum, ForumService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
