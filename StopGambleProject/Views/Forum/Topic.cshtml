@@ -10,7 +10,9 @@
             @foreach (var post in Model.Posts)
             {
                 <tr>
-                    <td>@post.Title</td>
+                    <td>
+                    <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
+                    @post.Title</a></td>
                 </tr>
                 <tr>
                     <td>@post.AuthorName</td>
@@ -26,7 +28,8 @@
     </table>
 } else
 {
-    <p>There are no posts in this forum.</p>
+<h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
+    <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
 }
 
 
