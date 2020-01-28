@@ -11,7 +11,7 @@ namespace Project.Data.Models
         public string Description { get; set; }
         public DateTime Created { get; set; }
         public string ImageUrl { get; set; }
-
+        
         //A forum is a collection of posts.
         public virtual IEnumerable<Post> Posts { get; set; }
     }
