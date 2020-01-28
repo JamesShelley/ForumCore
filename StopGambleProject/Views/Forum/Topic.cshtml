@@ -4,6 +4,9 @@
 
         <h1>Welcome to the @Model.Forum.Name Forum</h1>
 
+        <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create new post</a>
+
+
         @if (Model.Posts.Any())
         {
             <table class="ui celled table" id="forumIndexTable">
@@ -32,11 +35,11 @@
         }
         else
         {
-    <div class="ui raised very padded text container segment">
-        <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
-        <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
-    </div>
-            
+            <div class="ui raised very padded text container segment">
+                <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
+                <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+            </div>
+
         }
     </div>
 
