@@ -1,23 +1,27 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
+<style>
+  
 
+</style>
     <h1>Forum List</h1>
 
-<table class="table table-hover" id="forumIndexTable">
-    <tbody>
-            @foreach (var forum in Model.ForumList)
-            {
-                <tr>
-                    <td>
-                        <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
-                    </td>
-                    <td>
-                        @forum.Description
-                    </td>
-                </tr>
-            }
-        
-    </tbody>
-</table>
+        <table class="responsive-card-table unstriped" id="forumIndexTable">
+            <tbody>
+                @foreach (var forum in Model.ForumList)
+                {
+                    <tr>
+                        <td>
+                            <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
+                        </td>
+                        <td>
+                            @forum.Description
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
 
 
 

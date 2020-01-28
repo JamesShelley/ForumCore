@@ -4,42 +4,85 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - StopGambleProject</title>
-    <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <div class="top-bar">
-        <div class="top-bar-left">
-            <ul class="menu">
-                <li class="menu-text">Yeti Agency</li>
-                <li><a href="#">One</a></li>
-                <li><a href="#">Two</a></li>
-            </ul>
+<body id="root" class="Site">
+    <header>
+        <div class="ui tablet computer only padded grid">
+            <div class="ui borderless fluid huge inverted menu">
+                <div class="ui container">
+                    <a class="header item" asp-controller="Home" asp-action="Index">Forum Core</a>
+                    <a class="item" href="#root">About</a>
+                    <a class="item" asp-controller="Forum" asp-action="Index">Forum</a>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
         </div>
-        <div class="top-bar-right">
-            <ul class="menu">
-                <li><a href="#">Three</a></li>
-                <li><a href="#">Four</a></li>
-                <partial name="_LoginPartial" />
-            </ul>
+        <div class="ui mobile only padded grid">
+            <div class="ui borderless fluid huge inverted menu">
+                <a class="header item" href="#root">Project Name</a>
+                <div class="right menu">
+                    <div class="item">
+                        <button class="ui icon toggle basic inverted button">
+                            <i class="content icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="ui vertical borderless fluid inverted menu">
+                    <a class="active item" asp-controller="Home" asp-action="Index">Forum Core</a>
+                    <a class="item" href="#root">About</a>
+                    <a class="item" asp-controller="Forum" asp-action="Index">Forum</a>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
         </div>
-    </div>
-
-    @RenderBody()
-
-
-    <hr>
-    <div class="row column">
-        <ul class="menu">
-            <li><a href="#">One</a></li>
-            <li><a href="#">Two</a></li>
-            <li><a href="#">Three</a></li>
-            <li><a href="#">Four</a></li>
-        </ul>
-    </div>
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    </header>
+    <main class="Site-content">
+        @RenderBody()
+    </main>
+    <footer>
+        <div class="ui inverted vertical footer segment">
+            <div class="ui container">
+                <div class="ui stackable inverted divided equal height stackable grid">
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">About</h4>
+                        <div class="ui inverted link list">
+                            <a class="item" href="#root">Sitemap</a>
+                            <a class="item" href="#root">Contact Us</a>
+                            <a class="item" href="#root">Religious Ceremonies</a>
+                            <a class="item" href="#root">Gazebo Plans</a>
+                        </div>
+                    </div>
+                    <div class="three wide column">
+                        <h4 class="ui inverted header">Services</h4>
+                        <div class="ui inverted link list">
+                            <a class="item" href="#root">Banana Pre-Order</a>
+                            <a class="item" href="#root">DNA FAQ</a>
+                            <a class="item" href="#root">How To Access</a>
+                            <a class="item" href="#root">Favorite X-Men</a>
+                        </div>
+                    </div>
+                    <div class="seven wide column">
+                        <h4 class="ui inverted header">Footer Header</h4>
+                        <p>
+                            Extra space for a call to action inside the footer that could
+                            help re-engage users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".ui.toggle.button").click(function () {
+                $(".mobile.only.grid .ui.vertical.menu").toggle(100);
+            });
+        });
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
