@@ -1,0 +1,36 @@
+﻿@model StopGambleProject.Models.Post.PostIndexModel
+
+
+<h1>@Model.Title</h1>
+
+<div>
+    Author: @Model.AuthorName (@Model.AuthorRating)
+    Created: @Model.Created
+</div>
+
+<div>
+    @Model.PostContent
+</div>
+
+@if(Model.Replies.Any())
+{
+    foreach(var reply in Model.Replies)
+    {
+<div>
+    <div>
+        Author: @reply.AuthorName (@reply.AuthorRating)
+        Created: @reply.Created
+    </div>
+
+    <div>
+        @reply.ReplyContent
+    </div>
+</div>
+    }
+
+} else
+{
+    <div>
+        <p>There are no replies to this post.</p>
+    </div>
+}
