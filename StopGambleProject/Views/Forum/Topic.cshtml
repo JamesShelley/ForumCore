@@ -1,0 +1,32 @@
+﻿@model StopGambleProject.Models.Forum.ForumTopicModel
+
+
+<h1>Welcome to the @Model.Forum.Name Forum</h1>
+
+@if(Model.Posts.Any())
+{
+    <table class="table table-bordered table-hover">
+        <tbody>
+            @foreach (var post in Model.Posts)
+            {
+                <tr>
+                    <td>@post.Title</td>
+                </tr>
+                <tr>
+                    <td>@post.AuthorName</td>
+                </tr>
+                <tr>
+                    <td>@post.DatePosted</td>
+                </tr>
+                <tr>
+                    <td>@post.RepliesCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+} else
+{
+    <p>There are no posts in this forum.</p>
+}
+
+
