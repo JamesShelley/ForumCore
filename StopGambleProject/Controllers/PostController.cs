@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Data;
-using Project.Data.Models;
+using StopGambleProject.Models.Post;
 
 namespace StopGambleProject.Controllers
 {
@@ -19,6 +19,10 @@ namespace StopGambleProject.Controllers
         {
             var post = _postService.GetById(id);
 
+            var model = new PostIndexModel
+            {
+
+            };
 
             return View();
         }

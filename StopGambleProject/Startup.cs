@@ -16,7 +16,7 @@ using Project.Data.Models;
 using Project.Data;
 using Project.Service;
 
-namespace StopGambleProject
+namespace StopGambleProjects
 {
     public class Startup
     {
