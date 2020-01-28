@@ -49,18 +49,25 @@ namespace StopGambleProject.Controllers
 
         public IActionResult Create(int id)
         {
-            // id is forum id
-            var forum = _forumService.GetById(id);
-
-            var model = new NewPostModel
+            var userId = _userManager.GetUserId(User);
+            if(User.Identity.IsAuthenticated)
             {
-              ForumName = forum.Title,
-              ForumId = forum.Id,
-              ForumImageUrl = forum.ImageUrl,
-              AuthorName = User.Identity.Name
-            };
+                // id is forum id
+                var forum = _forumService.GetById(id);
+
+                var model = new NewPostModel
+                {
+                    ForumName = forum.Title,
+                    ForumId = forum.Id,
+                    ForumImageUrl = forum.ImageUrl,
+                    AuthorName = User.Identity.Name
+                };
 
             return View(model);
+            } else
+            {
+                return Redirect("/");
+            }
         }
 
         //Take info from the user in the form of the Create View Model
@@ -68,14 +75,14 @@ namespace StopGambleProject.Controllers
         public async Task<IActionResult> AddPost(NewPostModel model)
         {
             var userId = _userManager.GetUserId(User);
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = _userManager.FindByIdAsync(userId).Result;
 
             var post = BuildPost(model, user);
 
             await _postService.Add(post);
             //Todo implement user rating management.
 
-            return RedirectToAction("Index","Post", post.Id);
+            return RedirectToAction("Index","Post", new { id = post.Id });
 
         }
 
