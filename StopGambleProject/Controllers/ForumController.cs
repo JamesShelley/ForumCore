@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Project.Data;
+using Project.Data.Models;
 using StopGambleProject.Models.Forum;
+using StopGambleProject.Models.Post;
+using System;
 using System.Linq;
 
 namespace StopGambleProject.Controllers
@@ -36,10 +39,23 @@ namespace StopGambleProject.Controllers
         public IActionResult Topic(int id)
         {
             var forums = _forumService.GetById(id);
-            var posts = _postService.GetFilteredPosts(id);
+            var posts = _postService.GetPostsByForum(id);
             
-
+            var postListings = posts.Select(post => new PostListingModel {
+                Id = post.Id,
+                AuthorId = post.User.Id,
+                AuthorRating = post.User.Rating,
+                Title = post.Title,
+                DatePosted = post.Created.ToString(),
+                RepliesCount = post.Replies.Count(),
+                Forum = BuildForumListing(post)
+            });
             return View();
+        }
+
+        private ForumListingModel BuildForumListing(Post post)
+        {
+            throw new NotImplementedException();
         }
     }
 }

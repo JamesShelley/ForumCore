@@ -10,7 +10,7 @@ namespace StopGambleProject.Models.Post
         public string AuthorName { get; set; }
         public int AuthorRating { get; set; }
         public string AuthorId { get; set; }
-        public DateTime DatePosted { get; set; }
+        public string DatePosted { get; set; }
         
         public int RepliesCount { get; set; }
 
