@@ -1,4 +1,5 @@
-﻿using Project.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Data;
 using System;
@@ -28,7 +29,8 @@ namespace Project.Service
 
         public IEnumerable<Forum> GetAll()
         {
-            throw new NotImplementedException();
+            //Return all posts in a Forum
+            return _context.Forums.Include(Forum => Forum.Posts);
         }
 
         public IEnumerable<ApplicationUser> GetAllActiveUsers()
