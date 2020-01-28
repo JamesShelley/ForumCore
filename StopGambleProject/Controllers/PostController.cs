@@ -16,7 +16,7 @@ namespace StopGambleProject.Controllers
 
         public PostController(IPost postService)
         {
-            postService = _postService;
+            _postService = postService;
         }
 
         public IActionResult Index(int id)
