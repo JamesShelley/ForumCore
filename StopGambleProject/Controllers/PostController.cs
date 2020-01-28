@@ -75,19 +75,21 @@ namespace StopGambleProject.Controllers
             await _postService.Add(post);
             //Todo implement user rating management.
 
-
             return RedirectToAction("Index","Post", post.Id);
 
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
+            var forum = _forumService.GetById(model.ForumId);
+
             return new Post
             {
                 Title = model.Title,
                 Content = model.Title,
                 Created = DateTime.Now,
-                User = user
+                User = user,
+                Forum = forum
             };
         }
 
