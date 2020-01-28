@@ -3,7 +3,6 @@ using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.Forum;
 using StopGambleProject.Models.Post;
-using System;
 using System.Linq;
 
 namespace StopGambleProject.Controllers
