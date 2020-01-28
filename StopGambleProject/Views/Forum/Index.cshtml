@@ -1,11 +1,7 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
-<style>
-  
-
-</style>
-    <h1>Forum List</h1>
-
-        <table class="responsive-card-table unstriped" id="forumIndexTable">
+    <div class="ui container" style="padding-top:10px;">
+        <h1>Forum List</h1>
+        <table class="ui celled table" id="forumIndexTable">
             <tbody>
                 @foreach (var forum in Model.ForumList)
                 {
@@ -21,8 +17,7 @@
 
             </tbody>
         </table>
-
-
+    </div>
 
 
 

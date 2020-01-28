@@ -10,15 +10,15 @@
     </li>
     <li>
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            <button  type="submit" class="ui red button">Logout</button>
         </form>
     </li>
 }
 else
 {
 
-    <a class="item" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
-    <a class="item" asp-area="Identity" asp-page="/Account/Login">Log in</a>
+    <a class="item ui primary button" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
+    <a class="item ui primary button" asp-area="Identity" asp-page="/Account/Login">Log in</a>
 
 }
 

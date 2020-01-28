@@ -1,36 +1,42 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
 
+    <div style="style=" padding-top:15x;">
+        <div class="ui raised very padded text container segment" style="padding-top:10px;">
 
-<h1>@Model.Title</h1>
+            <h1>@Model.Title</h1>
 
-<div>
-    Author: @Model.AuthorName (@Model.AuthorRating)
-    Created: @Model.Created
-</div>
+            <p>
+                s
+                Author: @Model.AuthorName (@Model.AuthorRating)
+                Created: @Model.Created
+            </p>
 
-<div>
-    @Model.PostContent
-</div>
-
-@if(Model.Replies.Any())
+            <p>
+                @Model.PostContent
+            </p>
+        </div>
+    </div>
+@if (Model.Replies.Any())
 {
-    foreach(var reply in Model.Replies)
+    foreach (var reply in Model.Replies)
     {
-<div>
-    <div>
-        Author: @reply.AuthorName (@reply.AuthorRating)
-        Created: @reply.Created
-    </div>
+        <div class="ui raised very padded text container segment">
+            <p>
+                Author: @reply.AuthorName (@reply.AuthorRating)
+                Created: @reply.Created
+            </p>
 
-    <div>
-        @reply.ReplyContent
-    </div>
-</div>
+            <p>
+                @reply.ReplyContent
+            </p>
+        </div>
     }
 
-} else
+}
+else
 {
-    <div>
+    <div class="ui raised very padded text container segment">
+
         <p>There are no replies to this post.</p>
     </div>
 }

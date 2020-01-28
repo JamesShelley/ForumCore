@@ -1,13 +1,12 @@
 ﻿@model StopGambleProject.Models.Forum.ForumTopicModel
 
+    <div class="ui container" style="padding-top:10px;">
 
-<h1>Welcome to the @Model.Forum.Name Forum</h1>
+        <h1>Welcome to the @Model.Forum.Name Forum</h1>
 
-@if (Model.Posts.Any())
-{
-    <div class="row">
-        <div class="medium-12 columns medium-push-12">
-            <table class="table table-bordered table-hover">
+        @if (Model.Posts.Any())
+        {
+            <table class="ui celled table" id="forumIndexTable">
                 <tbody>
                     @foreach (var post in Model.Posts)
                     {
@@ -30,12 +29,14 @@
                     }
                 </tbody>
             </table>
-            </div>
-        </div>
-            } else
-            {
-            <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
-            <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
-            }
-
+        }
+        else
+        {
+    <div class="ui raised very padded text container segment">
+        <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
+        <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+    </div>
+            
+        }
+    </div>
 
