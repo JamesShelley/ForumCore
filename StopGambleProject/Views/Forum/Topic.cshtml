@@ -1,15 +1,23 @@
-﻿@model StopGambleProject.Models.Forum.ForumTopicModel
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.Data.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model StopGambleProject.Models.Forum.ForumTopicModel
 
-    <div class="ui container" style="padding-top:20px;">
+<div class="ui container" style="padding-top:20px;">
 
-        <h1>
-            Welcome to the @Model.Forum.Name Forum - <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a>
-        </h1>
-
-        @if (Model.Posts.Any())
+    <h1>
+        Welcome to the @Model.Forum.Name Forum
+        @if (SignInManager.IsSignedIn(User))
         {
-            @foreach (var post in Model.Posts)
-            {
+            <span> - <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a></span>
+        }
+    </h1>
+
+    @if (Model.Posts.Any())
+    {
+        @foreach (var post in Model.Posts)
+        {
             <table class="ui celled table" id="forumIndexTable">
                 <tbody>
                     <tr>
@@ -23,15 +31,15 @@
                         <td>By @post.AuthorName - @post.DatePosted - (@post.RepliesCount)</td>
                     </tr>
                 </tbody>
-              </table>
-                }
-            }
-        else
-        {
-            <div class="ui raised very padded text container segment">
-                <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
-                <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
-            </div>
+            </table>
         }
-    </div>
+    }
+    else
+    {
+        <div class="ui raised very padded text container segment">
+            <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
+            <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+        </div>
+    }
+</div>
 
