@@ -1,4 +1,7 @@
-﻿<div class="ui center aligned text container">
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="ui center aligned text container">
     <h1 class="ui huge header">Forum Core</h1>
     <p class="lead">
         Lightweight, efficient, and feature rich Forum software.
@@ -55,3 +58,10 @@
         </div>
     </div>
 </div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="ui container" style="padding-top:20px;">
+        <h2>Latest Forum Activity</h2>
+
+    </div>
+}

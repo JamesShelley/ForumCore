@@ -57,7 +57,12 @@ namespace Project.Service
         {
             throw new NotImplementedException();
         }
-        
+
+        public IEnumerable<Post> GetLatestPosts(int numberOfPosts)
+        {
+            return GetAll().OrderByDescending(post => post.Created).Take(numberOfPosts);
+        }
+
         public IEnumerable<Post> GetPostsByForum(int id)
         {
             return _context.Forums.Where(forum => forum.Id == id).First()
