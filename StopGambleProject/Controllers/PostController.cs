@@ -82,7 +82,6 @@ namespace StopGambleProject.Controllers
             //Todo implement user rating management.
 
             return RedirectToAction("Index","Post", new { id = post.Id });
-
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
