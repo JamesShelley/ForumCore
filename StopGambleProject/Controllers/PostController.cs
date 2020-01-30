@@ -30,7 +30,6 @@ namespace StopGambleProject.Controllers
             var post = _postService.GetById(id);
             var replies = BuildPostReplies(post.Replies);
 
-
             var model = new PostIndexModel
             {
                 Id = post.Id,
