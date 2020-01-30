@@ -45,6 +45,7 @@ namespace StopGambleProjects
 
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
         }
 
