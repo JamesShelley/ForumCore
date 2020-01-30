@@ -12,8 +12,8 @@
         <div class="ui tablet computer only padded grid">
             <div class="ui borderless fluid huge inverted teal menu">
                 <div class="ui container">
-                    <a class="header item" asp-controller="Home" asp-action="Index">Forum Core</a>
-                    <a class="item" href="#root">About</a>
+                    <a class="header item" asp-controller="Home" asp-action="Index"><strong>Forum Core</strong></a>
+                    <a class="item" asp-controller="Home" asp-action="About">About</a>
                     <a class="item" asp-controller="Forum" asp-action="Index">Forum</a>
                     <div class="right menu">
                         <partial name="_LoginPartial" />
@@ -84,6 +84,10 @@
                 $(".mobile.only.grid .ui.vertical.menu").toggle(100);
             });
         });
+
+        $('.ui.accordion')
+         .accordion()
+;
     </script>
     @RenderSection("Scripts", required: false)
 </body>
