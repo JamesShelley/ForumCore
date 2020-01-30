@@ -1,67 +1,61 @@
-﻿@inject SignInManager<ApplicationUser> SignInManager
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.Data.Models;
+@model StopGambleProject.Models.Home.HomeIndexModel;
+@inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div class="ui center aligned text container">
-    <h1 class="ui huge header">Forum Core</h1>
-    <p class="lead">
-        Lightweight, efficient, and feature rich Forum software.
-    </p>
-    <p class="lead">
-        Written in ASP.NET Core 3.0
-    </p>
+    <div class="ui center aligned text container">
+        <h1 class="ui huge header">Forum Core</h1>
+        <p class="lead">
+            Lightweight, efficient, and feature rich Forum software.
+        </p>
+        <p class="lead">
+            Written in ASP.NET Core 3.0
+        </p>
+        @if (SignInManager.IsSignedIn(User))
+        {
+        <form asp-controller="Search" asp-action="Search" method="post">
+            <div class="ui input">
+                <input type="text" placeholder="Search posts">
+            </div>
+        </form>
+        }
+    </div>
 
+<div class="ui center aligned text container"style="padding-bottom: 25px">
+    <h2>Latest Posts</h2>
+    <table class="ui celled table" id="forumIndexTable">
+        <tbody>
+            @foreach (var post in Model.LatestPosts)
+            {
+                <tr>
+                    <td>
+                        <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl);">   </div>
+                        <a href="/Post/Index/@post.Id">@post.Title</a>
+                        <div class="postSubTitle">
+                            @if (post.RepliesCount == 1)
+                            {
+                                <span>@post.RepliesCount Reply </span>
+                            }
+                            @if (post.RepliesCount == 0)
+                            {
+                                <span>No Replies </span>
+                            }
+                            else
+                            {
+                                <span>@post.RepliesCount Replies </span>
+                            }
+                            <span class="postUser">
+                                , Author:
+                                <a href="Profile/Detail/@post.AuthorId">
+                                    @post.AuthorName
+                                </a>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
-<div class="ui center aligned text container">
-    <div class="ui three column stackable grid">
-        <div class="column">
-            <div class="ui raised segment">
-                <div class="ui placeholder">
-                    <div class="image header">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="medium line"></div>
-                        <div class="short line"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui raised segment">
-                <div class="ui placeholder">
-                    <div class="image header">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="medium line"></div>
-                        <div class="short line"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui raised segment">
-                <div class="ui placeholder">
-                    <div class="image header">
-                        <div class="line"></div>
-                        <div class="line"></div>
-                    </div>
-                    <div class="paragraph">
-                        <div class="medium line"></div>
-                        <div class="short line"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@if (SignInManager.IsSignedIn(User))
-{
-    <div class="ui container" style="padding-top:20px;">
-        <h2>Latest Forum Activity</h2>
-
-    </div>
-}
