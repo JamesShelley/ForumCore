@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.Data.Models;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StopGambleProject</title>
+    <title>Forum Core</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -18,7 +22,7 @@
                     <div class="right menu">
                         <partial name="_LoginPartial" />
                     </div>
-                </div>
+                    </div>
             </div>
         </div>
         <div class="ui mobile only padded grid">
@@ -86,8 +90,8 @@
         });
 
         $('.ui.accordion')
-         .accordion()
-;
+            .accordion()
+            ;
     </script>
     @RenderSection("Scripts", required: false)
 </body>

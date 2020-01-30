@@ -5,10 +5,19 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-        <a class="item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
-        <form class="form-inline" style="padding-top:5px;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="ui red button">Logout</button>
-        </form>
+    <div class="ui simple dropdown item">
+        Profile
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            <a class="item">Electronics</a>
+            <a class="item">Automotive</a>
+            <a class="item">Home</a>
+        </div>
+    </div>
+    <a class="item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
+    <form class="form-inline" style="padding-top:5px;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <button type="submit" class="ui red button">Logout</button>
+    </form>
 }
 else
 {
