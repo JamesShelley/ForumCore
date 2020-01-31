@@ -30,27 +30,34 @@
             {
                 <tr>
                     <td>
-                        <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl);">   </div>
-                        <a href="/Post/Index/@post.Id">@post.Title</a>
-                        <div class="postSubTitle">
-                            @if (post.RepliesCount == 1)
-                            {
-                                <span>@post.RepliesCount Reply </span>
-                            }
-                            @if (post.RepliesCount == 0)
-                            {
-                                <span>No Replies </span>
-                            }
-                            else
-                            {
-                                <span>@post.RepliesCount Replies </span>
-                            }
-                            <span class="postUser">
-                                , Author:
-                                <a href="Profile/Detail/@post.AuthorId">
-                                    @post.AuthorName
-                                </a>
-                            </span>
+                        <div class="ui grid">
+                            <div class="one wide column">
+                                <div class="forumLogo" style="background-image: url(@post.Forum.ImageUrl); width:50px;height:50px"></div>
+                            </div>
+                            <div class="eleven wide column">
+
+                                <a href="/Post/Index/@post.Id">@post.Title</a>
+                                <div class="postSubTitle">
+                                    @if (post.RepliesCount == 1)
+                                    {
+                                        <span>@post.RepliesCount Reply </span>
+                                    }
+                                    @if (post.RepliesCount == 0)
+                                    {
+                                        <span>No Replies </span>
+                                    }
+                                    else
+                                    {
+                                        <span>@post.RepliesCount Replies </span>
+                                    }
+                                    <span class="postUser">
+                                        , Author:
+                                        <a href="Profile/Detail/@post.AuthorId">
+                                            @post.AuthorName
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>
