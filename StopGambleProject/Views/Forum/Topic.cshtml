@@ -1,24 +1,37 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using System.Security.Cryptography
+@using Microsoft.AspNetCore.Identity
 @using Project.Data.Models;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @model StopGambleProject.Models.Forum.ForumTopicModel
 
 <div class="ui container" style="padding-top:20px;">
-
-    <h1>
-        Welcome to the @Model.Forum.Name Forum
         @if (SignInManager.IsSignedIn(User))
         {
-            <span><a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a></span>
+            <div class="ui grid">
+                <div class="two column row">
+                    <div class="eleven wide column">
+                        <h1>
+                            Welcome to the @Model.Forum.Name Forum
+                        </h1>
+                    </div>
+                    <div class="two wide column">
+                        <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
+                        </div>
+                </div>
+                </div>
         }
-    </h1>
+        else
+        {
+            <h1>@Model.Forum.Name Forum</h1>
+        }
+
     
     @if (Model.Posts.Any())
     {
         <form asp-controller="Search" asp-action="Search" method="post">
             <div class="ui input">
-                <input style="width:100%" type="text" placeholder="Search @Model.Forum.Name posts">
+                <input style="width:500px" type="text" placeholder="Search @Model.Forum.Name posts">
             </div>
         </form>
         @foreach (var post in Model.Posts)
