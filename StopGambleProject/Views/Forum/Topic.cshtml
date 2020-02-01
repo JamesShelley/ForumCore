@@ -22,13 +22,36 @@
                 <tbody>
                     <tr>
                         <td>
-                            <a asp-controller="Post" asp-action="Index" asp-route-id="@post.Id">
-                                @post.Title
-                            </a>
+                            <div class="ui grid">
+                                <div class="one wide column">
+                                    <img class="ui small image" src="@post.Forum.ImageUrl" style="width:40px;height:40px;border: 1px solid black;">
+                                </div>
+                                <div class="eleven wide column">
+
+                                    <a href="/Post/Index/@post.Id">@post.Title</a>
+                                    <div class="postSubTitle">
+                                        @if (post.RepliesCount == 1)
+                                        {
+                                            <span>@post.RepliesCount Reply </span>
+                                        }
+                                        @if (post.RepliesCount == 0)
+                                        {
+                                            <span>No Replies </span>
+                                        }
+                                        else
+                                        {
+                                            <span>@post.RepliesCount Replies </span>
+                                        }
+                                        <span class="postUser">
+                                            , Author:
+                                            <a href="Profile/Detail/@post.AuthorId">
+                                                @post.AuthorName
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>By @post.AuthorName - @post.DatePosted - (@post.RepliesCount)</td>
                     </tr>
                 </tbody>
             </table>
