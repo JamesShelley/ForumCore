@@ -34,7 +34,7 @@ namespace Project.Service
             throw new NotImplementedException();
         }
 
-        public Task EditPostCotnent(int id, string newContent)
+        public Task EditPostContent(int id, string newContent)
         {
             throw new NotImplementedException();
         }
