@@ -14,7 +14,6 @@ namespace Project.Data
         IEnumerable<Post> GetPostsByForum(int id);
         IEnumerable<Post> GetLatestPosts(int numberOfPosts);
 
-
         Task Add(Post post);
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);

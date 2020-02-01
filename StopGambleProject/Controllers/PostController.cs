@@ -39,7 +39,7 @@ namespace StopGambleProject.Controllers
                 AuthorImageUrl = post.User.ProfileImageUrl,
                 AuthorRating = post.User.Rating,
                 Created = post.Created,
-                PostContent = post.Content,
+                Content = post.Content,
                 Replies = replies,
                 ForumId = post.Forum.Id,
                 ForumName = post.Forum.Title,
@@ -94,7 +94,7 @@ namespace StopGambleProject.Controllers
             return new Post
             {
                 Title = model.Title,
-                Content = model.Title,
+                Content = model.Content,
                 Created = DateTime.Now,
                 User = user,
                 Forum = forum
