@@ -1,13 +1,22 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
 
-<div class="ui container" style="padding-top:20px;">
-    <h1>
-        <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
-    </h1>
-
+<div class="ui container segment left aligned" style="padding-top:20px;">
+        <div class="ui grid">
+                <div class="two column row">
+                    <div class="ten wide column">
+                        <h1>
+                            @Model.Title
+                        </h1>
+                    </div>
+                    <div class="two wide column">
+                        <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
+                    </div>
+                </div>
+            </div>
 </div>
+
 <div style="padding-top:25px;">
-    <div class="ui raised very padded text container segment" style="padding-top:10px;">
+    <div class="ui raised very padded text container post segment" style="padding-top:10px;">
         <div class="ui equal width grid">
             <div class="two column row">
                 <div class="two wide column">
@@ -17,13 +26,13 @@
                 </div>
                 <div class="ten wide column" style="padding-top: 15px">
                     <h3>
-                        @Model.Title 
+                        @Model.Title
                         <span style="font-size:14px;">
                             @if (Model.IsAdmin)
                             {
                                 <i class="chess queen icon" style="color:gold"></i>
                             }
-                         </span>
+                        </span>
                     </h3>
                 </div>
             </div>
@@ -50,8 +59,8 @@
 {
     foreach (var reply in Model.Replies)
     {
-        <div style="padding-top:25px;">
-            <div class="ui raised very padded text container segment" style="padding-top:10px;">
+        <div style="padding-top:25px; padding-bottom:25px;">
+            <div class="ui raised very padded text container post segment" style="padding-top:10px;">
                 <div class="ui equal width grid">
                     <div class="two column row">
                         <div class="two wide column">
@@ -61,13 +70,14 @@
                         </div>
                         <div class="ten wide column" style="padding-top: 15px">
                             <h3>
-                                @Model.Title 
-                                <span style="font-size:14px;"> - <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
+                                @Model.Title
+                                <span style="font-size:14px;">
+                                    - <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
                                     @if (@reply.IsAdmin)
                                     {
                                         <i class="chess queen icon" style="color:gold"></i>
                                     }
-                                 </span>
+                                </span>
                             </h3>
                         </div>
                     </div>
@@ -77,9 +87,9 @@
                         </div>
                     </div>
                     <div class="two column row">
-                           <div class="two wide column">
-                               <p> @reply.Created</p>
-                           </div>
+                        <div class="two wide column">
+                            <p> @reply.Created</p>
+                        </div>
                         <div class="ten wide column">
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -95,14 +105,15 @@
 else
 {
     <div class="ui raised very padded text container segment">
-             @if (User.Identity.IsAuthenticated)
-             {
-                 <p>There are no replies to this post, why not create one?</p>
-                 <a class="ui green button"> + Reply</a>
-             }
-             else
-             {
-                 <p>There are no replies to this post.</p>
-             }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p>There are no replies to this post, why not create one?</p>
+            <a class="ui green button"> + Reply</a>
+        }
+        else
+        {
+            <p>There are no replies to this post.</p>
+        }
     </div>
 }
+<br>
