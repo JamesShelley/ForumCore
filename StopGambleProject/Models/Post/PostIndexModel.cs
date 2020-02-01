@@ -16,7 +16,9 @@ namespace StopGambleProject.Models.Post
 
         public int ForumId { get; set; }
         public string ForumName { get; set; }
-
+        
+        public bool IsAdmin { get; set; }
+        
         public IEnumerable<PostReplyModel> Replies { get; set; }
 
     }

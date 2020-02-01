@@ -13,5 +13,7 @@ namespace StopGambleProject.Models.Post
         public string ReplyContent { get; set; }
 
         public int PostId { get; set; }
+        public bool IsAdmin { get; set; }
+        
     }
 }

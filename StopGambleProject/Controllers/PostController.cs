@@ -42,13 +42,13 @@ namespace StopGambleProject.Controllers
                 PostContent = post.Content,
                 Replies = replies,
                 ForumId = post.Forum.Id,
-                ForumName = post.Forum.Title
-
+                ForumName = post.Forum.Title,
+                IsAdmin = IsAuthorAdmin(post.User)
             };
 
             return View(model);
         }
-
+        
         public IActionResult Create(int id)
         {
             var userId = _userManager.GetUserId(User);
@@ -100,6 +100,11 @@ namespace StopGambleProject.Controllers
                 Forum = forum
             };
         }
+        
+        private bool IsAuthorAdmin(ApplicationUser user)
+        {
+            return _userManager.GetRolesAsync(user).Result.Contains("Admin");
+        }
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)
         {
@@ -112,6 +117,7 @@ namespace StopGambleProject.Controllers
                 AuthorRating = reply.User.Rating,
                 Created = reply.Created,
                 ReplyContent = reply.Content,
+                IsAdmin = IsAuthorAdmin(reply.User)
             });
         }
     }
