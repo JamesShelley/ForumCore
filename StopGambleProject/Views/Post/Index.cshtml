@@ -1,41 +1,47 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
 
+    <div class="ui container" style="padding-top:20px;">
+        <h1><a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a></h1>
+
+    </div>
     <div style="padding-top:25px;">
-        <div class="ui raised very padded text container segment" style="padding-top:10px;">
-
-            <h1>@Model.Title - <span><a class="" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a></span></h1>
-
-            <p>
-                Author: @Model.AuthorName (@Model.AuthorRating)
-                Created: @Model.Created
-            </p>
-
-            <p>
-                @Model.PostContent
-            </p>
-        </div>
+            <div class="ui raised very padded text container segment" style="padding-top:10px;">
+                <div class="ui equal width grid">
+                    <div class="two column row">
+                        <div class="two wide column">
+                            <img class="ui small image" src="@Model.AuthorImageUrl" style="width:50px;height:50px;border: 1px solid black;">
+                        </div>
+                        <div class="ten wide column" style="padding-top: 15px"><h3>@Model.Title <span style="font-size:14px;"> - @Model.AuthorName (@Model.AuthorRating)</span></h3> </div>
+                    </div>
+                    <div class="one column row">
+                        <div class="twelve wide column">
+                            <p>  @Model.PostContent</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
     </div>
-@if (Model.Replies.Any())
-{
-    foreach (var reply in Model.Replies)
-    {
-        <div class="ui raised very padded text container segment">
-            <p>
-                Author: @reply.AuthorName (@reply.AuthorRating)
-                Created: @reply.Created
-            </p>
+            @if (Model.Replies.Any())
+            {
+                foreach (var reply in Model.Replies)
+                {
+                    <div class="ui raised very padded text container segment">
+                        <p>
+                            Author: @reply.AuthorName (@reply.AuthorRating)
+                            Created: @reply.Created
+                        </p>
 
-            <p>
-                @reply.ReplyContent
-            </p>
-        </div>
-    }
+                        <p>
+                            @reply.ReplyContent
+                        </p>
+                    </div>
+                }
 
-}
-else
-{
-    <div class="ui raised very padded text container segment">
+            }
+            else
+            {
+                <div class="ui raised very padded text container segment">
 
-        <p>There are no replies to this post.</p>
-    </div>
-}
+                    <p>There are no replies to this post.</p>
+                </div>
+            }
