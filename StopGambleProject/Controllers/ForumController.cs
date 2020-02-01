@@ -45,6 +45,7 @@ namespace StopGambleProject.Controllers
                 AuthorId = post.User.Id,
                 AuthorRating = post.User.Rating,
                 AuthorName = post.User.UserName,
+                AuthorImageUrl = post.User.ProfileImageUrl,
                 Title = post.Title,
                 DatePosted = post.Created.ToString(),
                 RepliesCount = post.Replies.Count(),
