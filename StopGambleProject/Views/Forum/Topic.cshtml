@@ -13,13 +13,14 @@
             <span><a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a></span>
         }
     </h1>
-     <form asp-controller="Search" asp-action="Search" method="post">
-                <div class="ui input">
-                    <input type="text" placeholder="Search @Model.Forum.Name posts">
-                </div>
-            </form>
+    
     @if (Model.Posts.Any())
     {
+        <form asp-controller="Search" asp-action="Search" method="post">
+            <div class="ui input">
+                <input style="width:100%" type="text" placeholder="Search @Model.Forum.Name posts">
+            </div>
+        </form>
         @foreach (var post in Model.Posts)
         {
             <table class="ui celled table" id="forumIndexTable">
