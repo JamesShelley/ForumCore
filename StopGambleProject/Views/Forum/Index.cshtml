@@ -1,15 +1,18 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
-    <div class="ui container" style="padding-top:20px;">
+<div class="ui center aligned text container" style="padding-bottom: 25px">
         <h1>Forum List</h1>
         <table class="ui celled table" id="forumIndexTable">
             <tbody>
                 @foreach (var forum in Model.ForumList)
                 {
                     <tr>
-                        <td>
-                            <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name</a>
+                        <td class="collapsing">
+                            <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;border: 1px solid black;"/>
+                          </td>
+                        <td class="collapsing" style="border-left: none">
+                            <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
                         </td>
-                        <td>
+                        <td> 
                             @forum.Description
                         </td>
                     </tr>

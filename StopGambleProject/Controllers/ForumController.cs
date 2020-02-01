@@ -23,7 +23,8 @@ namespace StopGambleProject.Controllers
                 {
                     Id = forum.Id,
                     Name = forum.Title,
-                    Description = forum.Description
+                    Description = forum.Description,
+                    ImageUrl = forum.ImageUrl
                 });
 
             var model = new ForumIndexModel

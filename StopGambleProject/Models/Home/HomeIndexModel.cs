@@ -10,6 +10,6 @@ namespace StopGambleProject.Models.Home
     {
         public string SearchQuery { get; set; }
         public IEnumerable<PostListingModel> LatestPosts { get; set; }
-
+        
     }
 }

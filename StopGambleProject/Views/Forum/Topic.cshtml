@@ -10,7 +10,7 @@
         Welcome to the @Model.Forum.Name Forum
         @if (SignInManager.IsSignedIn(User))
         {
-            <span> - <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a></span>
+            <span><a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button"> + Create new post</a></span>
         }
     </h1>
 
