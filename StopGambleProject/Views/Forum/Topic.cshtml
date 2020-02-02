@@ -24,15 +24,19 @@
     else
     {
         <h1>@Model.Forum.Name Forum</h1>
+        <div class="ui floating teal message">
+        <p>You must be a <a href="/Identity/Account/Register">registered</a> member to post</p>
+        </div>
     }
-
 
     @if (Model.Posts.Any())
     {
         <form asp-controller="Search" asp-action="Search" method="post">
             <div class="ui input">
                 <input style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
-                <button type="submit" class="ui blue button"><i class="search icon"></i></button>
+                <button type="submit" class="ui blue button">
+                    <i class="search icon"></i>
+                </button>
             </div>
         </form>
         @foreach (var post in Model.Posts)
