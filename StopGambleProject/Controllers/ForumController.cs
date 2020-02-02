@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.Forum;
@@ -10,10 +12,12 @@ namespace StopGambleProject.Controllers
     public class ForumController : Controller
     {
         private readonly IForum _forumService;
+        private readonly IPost _postService;
         
-        public ForumController(IForum forumService)
+        public ForumController(IForum forumService, IPost postService)
         {
             _forumService = forumService;
+            _postService = postService;
         }
 
         public IActionResult Index()
@@ -35,11 +39,11 @@ namespace StopGambleProject.Controllers
             return View(model);
         }
 
-        public IActionResult Topic(int id)
+        public IActionResult Topic(int id, string searchQuery)
         {
             var forum = _forumService.GetById(id);
-            var posts = forum.Posts;
-            
+            var posts = _postService.GetFilteredPosts(forum, searchQuery).ToList();
+        
             var postListings = posts.Select(post => new PostListingModel {
                 Id = post.Id,
                 AuthorId = post.User.Id,
@@ -51,7 +55,7 @@ namespace StopGambleProject.Controllers
                 RepliesCount = post.Replies.Count(),
                 Forum = BuildForumListing(post)
             });
-
+            
             var model = new ForumTopicModel
             {
                 Posts = postListings,
@@ -60,6 +64,13 @@ namespace StopGambleProject.Controllers
 
             return View(model);
         }
+        // id = forum id, searchQuery = users search
+        [HttpPost]
+        public IActionResult Search(int id, string searchQuery) 
+        {
+            return RedirectToAction("Topic", new {id, searchQuery});
+        }
+        
         private ForumListingModel BuildForumListing(Forum forum)
         {
             return new ForumListingModel

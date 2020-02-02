@@ -31,14 +31,16 @@
 
     @if (Model.Posts.Any())
     {
-        <form asp-controller="Search" asp-action="Search" method="post">
-            <div class="ui input">
-                <input style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
-                <button type="submit" class="ui blue button">
-                    <i class="search icon"></i>
-                </button>
-            </div>
-        </form>
+    <form asp-controller="Forum" asp-action="Search" method="post">
+        <div class="ui input">
+            <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
+            <button type="submit" class="ui blue button">
+                <i class="search icon"></i>
+            </button>
+        </div>
+        <input asp-for="Forum.Id" name="id" type="hidden" />
+
+    </form>
         @foreach (var post in Model.Posts)
         {
             <table class="ui celled table" id="forumIndexTable">
@@ -49,7 +51,7 @@
                             <div class="one wide column">
                                 <img class="ui small image" src="@post.AuthorImageUrl" style="width:40px;height:40px;border: 1px solid black;">
                             </div>
-                            <div class="eleven wide column">
+                            <div class="nine wide column">
 
                                 <a href="/Post/Index/@post.Id">@post.Title</a>
                                 <div class="postSubTitle">
@@ -70,8 +72,12 @@
                                         <a href="Profile/Detail/@post.AuthorId">
                                             @post.AuthorName
                                         </a>
+                                        (@post.AuthorRating)
                                     </span>
                                 </div>
+                            </div>
+                            <div class="two wide column">
+                                <p>@post.DatePosted</p>
                             </div>
                         </div>
                     </td>
@@ -83,8 +89,11 @@
     else
     {
         <div class="ui raised very padded text container segment">
-            <h3>It looks like there are no @Model.Forum.Name posts in this forum.</h3>
-            <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+            <h3>It looks like there are no @Model.Forum.Name posts yet.</h3>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+            }
         </div>
     }
 </div>
