@@ -39,10 +39,15 @@ namespace Project.Data
             user.PasswordHash = hashedPassword;
             
             var hasAdminRole = _context.Roles.Any(roles => roles.Name == "Admin");
-        
+            var hasModeratorRole = _context.Roles.Any(roles => roles.Name == "Moderator");
+
             if (!hasAdminRole)
             { 
                 roleStore.CreateAsync(new IdentityRole {Name = "Admin", NormalizedName = "admin"});
+            }
+            if (!hasModeratorRole)
+            { 
+                roleStore.CreateAsync(new IdentityRole {Name = "Moderator", NormalizedName = "moderator"});
             }
 
             var hasSuperUser = _context.Users.Any(u => u.UserName == user.UserName);

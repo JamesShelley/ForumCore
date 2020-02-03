@@ -23,4 +23,9 @@
     <ProjectReference Include="..\Project.Service\Project.Service.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Models\Admin" />
+  </ItemGroup>
+
 </Project>
