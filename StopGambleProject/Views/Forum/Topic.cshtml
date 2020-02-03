@@ -10,12 +10,12 @@
     {
         <div class="ui grid">
             <div class="two column row">
-                <div class="eleven wide column">
+                <div class="thirteen wide column">
                     <h1>
                         Welcome to the @Model.Forum.Name Forum
                     </h1>
                 </div>
-                <div class="two wide column">
+                <div class="three wide column">
                     <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
                 </div>
             </div>
@@ -28,18 +28,19 @@
         <p>You must be a <a href="/Identity/Account/Register">registered</a> member to post</p>
         </div>
     }
-
+    <br>
     @if (Model.Posts.Any())
     {
-    <form asp-controller="Forum" asp-action="Search" method="post">
-        <div class="ui input">
-            <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
-            <button type="submit" class="ui blue button">
-                <i class="search icon"></i>
-            </button>
-        </div>
-        <input asp-for="Forum.Id" name="id" type="hidden" />
-    </form>
+        <form asp-controller="Forum" asp-action="Search" method="post">
+            <div class="ui input">
+                <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
+                <button type="submit" class="ui blue button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+            <input asp-for="Forum.Id" name="id" type="hidden" />
+        </form>
+        <br>
         @foreach (var post in Model.Posts)
         {
             <table class="ui celled table" id="forumIndexTable">
@@ -50,7 +51,7 @@
                             <div class="one wide column">
                                 <img class="ui small image" src="@post.AuthorImageUrl" style="width:40px;height:40px;border: 1px solid black;">
                             </div>
-                            <div class="nine wide column">
+                            <div class="eleven wide column">
 
                                 <a href="/Post/Index/@post.Id">@post.Title</a>
                                 <div class="postSubTitle">
@@ -75,7 +76,7 @@
                                     </span>
                                 </div>
                             </div>
-                            <div class="two wide column">
+                            <div class="three wide column">
                                 <p>@post.DatePosted</p>
                             </div>
                         </div>
