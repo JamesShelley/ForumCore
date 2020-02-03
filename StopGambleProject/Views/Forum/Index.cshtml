@@ -1,4 +1,5 @@
-﻿@model StopGambleProject.Models.Forum.ForumIndexModel
+﻿@using Project.Data.Models
+@model StopGambleProject.Models.Forum.ForumIndexModel
 
 <div class="ui center aligned text container">
     <h1 class="ui huge header">Forum List
@@ -46,12 +47,34 @@ else
                     @if (User.IsInRole("Admin"))
                     {
                         <td class="collapsing">
-                            <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
+                            <button class="ui button red create_btn" type="button" id="test">Delete Forum</button>
                         </td>
                     }
                 </tr>
+                
+                @*Modal Popup*@
+                <div class="ui modal test">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        Delete forum
+                    </div>
+                    <div class="image content">
+                        <div class="description">
+                            <div class="ui header">@forum.Name</div>
+                            <p>@forum.Description</p>
+                        </div>
+                    </div>
+                    <div class="actions">
+                        <div class="ui black deny button">
+                            Cancel
+                        </div>
+                            <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
+                    </div>
+                </div>
+        @*End pop *@
             }
             </tbody>
         </table>
     </div>
 }
+
