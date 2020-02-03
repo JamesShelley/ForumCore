@@ -24,12 +24,6 @@
                 <div class="eleven wide column">
                     <p> <a href="/Profile/Detail/@Model.PostAuthorId">@Model.PostAuthorName</a> (@Model.PostAuthorRating) - @Model.PostCreated</p>
                 </div>
-                <div class="one wide column">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a class="ui green button">Reply</a>
-                    }
-                </div>
             </div>
         </div>
     </div>
@@ -40,7 +34,6 @@
     <h3>You are submitting this reply as @Model.AuthorName</h3>
     <form asp-action="AddReply" method="post" class="ui form" id="addPostForm">
         <div class="field">
-            <label asp-for="ReplyContent"></label>
             <textarea asp-for="ReplyContent" class="form-control" rows="20" placeholder="Your reply..." style="box-sizing: border-box; border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;" /></textarea>
         </div>
         <button type="submit" class="ui green button" id="submitReply">Submit Reply</button>
