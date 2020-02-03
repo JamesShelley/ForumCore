@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Data.Models;
+using StopGambleProject.Models.ApplicationUser;
 
 namespace StopGambleProject.Controllers
 {
@@ -21,11 +22,20 @@ namespace StopGambleProject.Controllers
         // GET
         public IActionResult Detail(string id)
         {
+            var user = _userService.GetById(id);
+            var userRoles = _userManager.GetRolesAsync(user).Result;
+            
             var model = new ProfileModel()
             {
-                
+                UserId = user.Id,
+                UserName = user.UserName,
+                UserRating = user.Rating.ToString(),
+                Email = user.Email,
+                ProfileImageUrl = user.ProfileImageUrl,
+                MemberSince = user.MemberSince,
+                IsAdmin = userRoles.Contains("Admin")
             };
-            return View();
+            return View(model);
         }
     }
 }

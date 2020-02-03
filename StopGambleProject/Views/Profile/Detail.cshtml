@@ -1,0 +1,35 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Project.Data.Models
+@model StopGambleProject.Models.ApplicationUser.ProfileModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+<div class="ui main text container">
+    <h1 class="ui header">User Profile Page</h1>
+    @if (User.IsInRole("Admin"))
+    {
+        <a href="" class="ui red button">Deactivate User</a>
+    }
+    
+    <p>This is a basic fixed menu template using fixed size containers.</p>
+    <p>A text container is used for the main container, which is useful for single column layouts</p>
+    <img class="wireframe" src="@Model.ProfileImageUrl">
+    @if (User.Identity.Name == Model.UserName)
+    {
+        <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+            <label class="ui blue button">
+                Browse <input type="file" name="file" style="display: none"/>
+            </label>
+            <button type="submit" class="ui red button">Upload</button>
+        </form>
+    }
+    
+    <p>Username: @Model.UserName</p>
+    @if (Model.IsAdmin)
+    {
+        <p style="color:red">Admin</p>
+    }
+    <p>Rating: @Model.UserRating</p>
+    <p>Email: @Model.Email</p>
+    <p>Registered: @Model.MemberSince.ToString()</p>
+</div>
