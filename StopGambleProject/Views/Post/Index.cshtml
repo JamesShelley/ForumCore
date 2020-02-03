@@ -70,9 +70,8 @@
                         </div>
                         <div class="ten wide column" style="padding-top: 15px">
                             <h3>
-                                @Model.Title
                                 <span style="font-size:14px;">
-                                    - <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
+                                    <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
                                     @if (@reply.IsAdmin)
                                     {
                                         <i class="chess queen icon" style="color:gold"></i>
@@ -82,12 +81,12 @@
                         </div>
                     </div>
                     <div class="one column row">
-                        <div class="twelve wide column">
+                        <div class="sixteen wide column">
                             <p> @reply.ReplyContent</p>
                         </div>
                     </div>
-                    <div class="two column row">
-                        <div class="two wide column">
+                    <div class="one column row">
+                        <div class="sixteen wide column">
                             <p> @reply.Created</p>
                         </div>
                     </div>
