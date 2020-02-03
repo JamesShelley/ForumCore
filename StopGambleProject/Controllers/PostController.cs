@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.Post;
+using StopGambleProject.Models.Reply;
 using System;
 using System.Collections.Generic;
 using System.Linq;

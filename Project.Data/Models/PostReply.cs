@@ -8,7 +8,7 @@ namespace Project.Data.Models
         public string Content { get; set; }
         public DateTime Created { get; set; }
         public virtual ApplicationUser User{ get; set; }
-        public virtual Post post { get; set; }
+        public virtual Post Post { get; set; }
 
     }
 }

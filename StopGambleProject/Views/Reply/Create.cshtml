@@ -1,0 +1,52 @@
+﻿@model StopGambleProject.Models.Reply.PostReplyModel
+
+<div style="padding-top:25px;">
+    <div class="ui raised very padded text container post segment" style="padding-top:10px;">
+        <div class="ui equal width grid">
+            <div class="two column row">
+                <div class="two wide column">
+                    <a href="/Profile/Detail/@Model.PostAuthorId">
+                        <img class="ui small image" src="@Model.PostAuthorImageUrl" style="width:50px;height:50px;border: 1px solid black;">
+                    </a>
+                </div>
+                <div class="ten wide column" style="padding-top: 15px">
+                    <h3>
+                        @Model.PostTitle
+                    </h3>
+                </div>
+            </div>
+            <div class="one column row">
+                <div class="twelve wide column">
+                    <p> @Model.PostContent</p>
+                </div>
+            </div>
+            <div class="one column row">
+                <div class="eleven wide column">
+                    <p> <a href="/Profile/Detail/@Model.PostAuthorId">@Model.PostAuthorName</a> (@Model.PostAuthorRating) - @Model.PostCreated</p>
+                </div>
+                <div class="one wide column">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="ui green button">Reply</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui center aligned text container">
+    <h1>New Reply to @Model.PostTitle in the @Model.ForumName Forum</h1>
+    <h3>You are submitting this reply as @Model.AuthorName</h3>
+    <form asp-action="AddReply" method="post" class="ui form" id="addPostForm">
+        <div class="field">
+            <label asp-for="ReplyContent"></label>
+            <textarea asp-for="ReplyContent" class="form-control" rows="20" placeholder="Your reply..." style="box-sizing: border-box; border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;" /></textarea>
+        </div>
+        <button type="submit" class="ui green button" id="submitReply">Submit Reply</button>
+        <input asp-for="AuthorId" type="hidden" />
+        <input asp-for="PostId" type="hidden" />
+        <input asp-for="ForumId" type="hidden" />
+    </form>
+</div>>
+

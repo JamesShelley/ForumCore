@@ -24,9 +24,10 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task AddReply(PostReply reply)
+        public async Task AddReply(PostReply reply)
         {
-            throw new NotImplementedException();
+            _context.PostReplies.Add(reply);
+            await _context.SaveChangesAsync();
         }
 
         public Task Delete(int id)
@@ -44,7 +45,6 @@ namespace Project.Service
             return _context.Posts.Include(post => post.User)
                  .Include(post => post.Replies).ThenInclude(reply => reply.User)
                  .Include(post => post.Forum);
-               
         }
 
         public Post GetById(int id)
@@ -76,8 +76,6 @@ namespace Project.Service
         {
             return _context.Forums.Where(forum => forum.Id == id).First()
                 .Posts;
-
-            
         }
     }
 }

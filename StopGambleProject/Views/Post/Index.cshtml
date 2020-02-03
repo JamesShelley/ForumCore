@@ -48,7 +48,7 @@
                 <div class="one wide column">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a class="ui green button">Reply</a>
+                        <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
                     }
                 </div>
             </div>
@@ -89,12 +89,6 @@
                     <div class="two column row">
                         <div class="two wide column">
                             <p> @reply.Created</p>
-                        </div>
-                        <div class="ten wide column">
-                            @if (User.Identity.IsAuthenticated)
-                            {
-                                <a class="ui green button"> + Reply</a>
-                            }
                         </div>
                     </div>
                 </div>

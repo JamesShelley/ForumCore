@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StopGambleProject.Models.Reply;
+using System;
 using System.Collections.Generic;
 
 namespace StopGambleProject.Models.Post
