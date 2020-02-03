@@ -1,0 +1,29 @@
+﻿@model StopGambleProject.Models.Forum.AddForumModel
+@using Microsoft.AspNetCore.Identity
+@using Project.Data.Models;
+
+<div class="ui center aligned text container">
+    <h1>Create a Forum</h1>
+    <form asp-action="AddForum" method="post" class="ui form" id="addPostForm">
+        <div class="field">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" placeholder="The title of the forum" class="form-control" />
+        </div>
+        <div class="field">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" placeholder="Brief description of the forum topic" class="form-control" placeholder="Forum Name" />
+        </div>
+        <div class="field">
+            <label class="ui blue button">
+                Browse <input asp-for="ImageUpload" typeof="file" name="file" style="display: none" />
+            </label>
+        </div>
+        <div class="field">
+            <img src="@Model.ImageUrl" />
+        </div>
+
+        <button type="submit" class="ui green button" id="submitPostBtn">Submit New Forum</button>
+    </form>
+</div>>
+
+

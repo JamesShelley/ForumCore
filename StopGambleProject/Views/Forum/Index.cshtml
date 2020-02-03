@@ -1,26 +1,45 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
-<div class="ui center aligned text container" style="padding-bottom: 25px">
-        <h1>Forum List</h1>
-        <table class="ui celled table" id="forumIndexTable">
-            <tbody>
-                @foreach (var forum in Model.ForumList)
+    <div class="ui center aligned text container">
+
+        <div class="ui grid">
+            <div class="two column row">
+                <div class="thirteen wide column">
+                    <h1>
+                        Forum List
+                    </h1>
+                </div>
+                @if (User.IsInRole("Admin"))
                 {
-                    <tr>
-                        <td class="collapsing">
-                            <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;border: 1px solid black;"/>
-                          </td>
-                        <td class="collapsing" style="border-left: none">
-                            <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
-                        </td>
-                        <td> 
-                            @forum.Description
-                        </td>
-                    </tr>
+                    <div class="three wide column">
+                        <a href="/Forum/Create" class="ui teal button">Create Forum</a>
+                    </div>
                 }
 
-            </tbody>
-        </table>
-    </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="ui center aligned text container" style="padding-bottom: 25px">
+            <table class="ui celled table" id="forumIndexTable">
+                <tbody>
+                    @foreach (var forum in Model.ForumList)
+                    {
+                        <tr>
+                            <td class="collapsing">
+                                <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;border: 1px solid black;" />
+                            </td>
+                            <td class="collapsing" style="border-left: none">
+                                <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
+                            </td>
+                            <td>
+                                @forum.Description
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
 
 
 

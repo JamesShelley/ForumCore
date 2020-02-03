@@ -1,11 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.Forum;
 using StopGambleProject.Models.Post;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System.Net.Http.Headers;
+using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace StopGambleProject.Controllers
 {
@@ -13,11 +17,15 @@ namespace StopGambleProject.Controllers
     {
         private readonly IForum _forumService;
         private readonly IPost _postService;
+        private readonly IUpload _uploadService;
+        private readonly IConfiguration _configuration;
         
-        public ForumController(IForum forumService, IPost postService)
+        public ForumController(IForum forumService, IPost postService, IUpload upload, IConfiguration configuration)
         {
             _forumService = forumService;
             _postService = postService;
+            _uploadService = upload;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -64,6 +72,59 @@ namespace StopGambleProject.Controllers
 
             return View(model);
         }
+
+        public IActionResult Create()
+        {
+            if (User.IsInRole("Admin"))
+            {
+                var model = new AddForumModel();
+                return View(model);
+            } else
+            {
+                return Redirect("/");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddForum(AddForumModel model)
+        {
+            var imageUri = "/images/forum/default.png";
+            
+            if(model.ImageUpload != null)
+            {
+                var blockBlob = UploadForumImage(model.ImageUpload);
+                imageUri = blockBlob.Uri.AbsoluteUri;
+            }
+
+            var forum = new Forum
+            {
+                Title = model.Title,
+                Description = model.Description,
+                ImageUrl = imageUri,
+                Created = DateTime.Now
+            };
+
+            await _forumService.Create(forum);
+            return RedirectToAction("Index", "Forum");
+        }
+
+        private CloudBlockBlob UploadForumImage(IFormFile file)
+        {
+            var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
+
+            var container = _uploadService.GetBlobContainer(connectionString);
+
+            var contentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            var fileName = contentDisposition.FileName.Trim('"');
+
+            var blockBlob = container.GetBlockBlobReference(fileName);
+
+            blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+
+            return blockBlob;
+        }
+
         // id = forum id, searchQuery = users search
         [HttpPost]
         public IActionResult Search(int id, string searchQuery) 
