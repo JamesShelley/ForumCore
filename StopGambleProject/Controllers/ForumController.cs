@@ -88,7 +88,6 @@ namespace StopGambleProject.Controllers
         public IActionResult DeleteForum(Forum forum)
         {
             _forumService.Delete(forum.Id).Wait();
-            _postService.Delete(forum.Id).Wait();
             return RedirectToAction("Index", "Forum");
         }
 

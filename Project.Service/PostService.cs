@@ -32,8 +32,8 @@ namespace Project.Service
 
         public async Task Delete(int id)
         {
-            var postsToBeDeleted = GetForumPostsToBeDeleted(id);
-            _context.Remove(postsToBeDeleted);
+            var post = GetById(id);
+            _context.Remove(post);
             await _context.SaveChangesAsync();
         }
 

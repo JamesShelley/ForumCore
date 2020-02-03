@@ -51,6 +51,14 @@
                     }
                 </div>
             </div>
+             <div class="one column row">
+                <div class="one wide column">
+                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                    {
+                        <button class="ui button red create_btn" type="button" id="test">Delete</button>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -109,3 +117,24 @@ else
     </div>
 }
 <br>
+
+@*Modal Popup*@
+<div class="ui modal test">
+    <i class="close icon"></i>
+    <div class="header">
+        Delete post
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui header">@Model.Title</div>
+            <p>@Model.Content</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+        <a asp-controller="Post" asp-action="DeletePost" asp-route-id="@Model.Id" class="ui red button">Delete</a>
+    </div>
+</div>
+@*End pop *@

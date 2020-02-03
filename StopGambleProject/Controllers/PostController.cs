@@ -105,6 +105,13 @@ namespace StopGambleProject.Controllers
             };
         }
         
+        public IActionResult DeletePost(Post post)
+        {
+            _postService.Delete(post.Id).Wait();
+            return Redirect("/Forum");
+            //  return RedirectToAction("Topic", "Forum", post.Forum.Id);
+        }
+        
         private bool IsAuthorAdmin(ApplicationUser user)
         {
             return _userManager.GetRolesAsync(user).Result.Contains("Admin");
