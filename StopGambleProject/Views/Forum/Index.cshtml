@@ -1,52 +1,65 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
-    <div class="ui center aligned text container">
+<div class="ui center aligned text container">
 
-        <div class="ui grid">
-            <div class="two column row">
-                <div class="thirteen wide column">
-                    <h1>
-                        Forum List
-                    </h1>
-                </div>
-                @if (User.IsInRole("Admin"))
-                {
-                    <div class="three wide column">
-                        <a href="/Forum/Create" class="ui teal button">Create Forum</a>
-                    </div>
-                }
-
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="thirteen wide column">
+                <h1>
+                    Forum List
+                </h1>
             </div>
-        </div>
-        </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="three wide column">
+                    <a href="/Forum/Create" class="ui teal button">Create Forum</a>
+                </div>
+            }
 
-        <div class="ui center aligned text container" style="padding-bottom: 25px">
-            <table class="ui celled table" id="forumIndexTable">
-                <tbody>
-                    @foreach (var forum in Model.ForumList)
+        </div>
+    </div>
+</div>
+
+@if (Model.ForumList.Count() == 0)
+{
+    <div class="ui center aligned text container">
+    <div class="ui massive red message">
+        @if (User.IsInRole("Admin"))
+        {
+            <p>No forums have been setup yet - please <a href="/Forum/Create">create</a> a forum to get started.</p>
+        }
+        else
+        {
+            <p>The administrator hasn't set up any forum topics yet. </p>
+        }
+    </div>
+    </div>
+}
+else
+{
+    <div class="ui center aligned text container" style="padding-bottom: 25px">
+        <table class="ui celled table" id="forumIndexTable">
+            <tbody>
+            @foreach (var forum in Model.ForumList)
+            {
+                <tr>
+                    <td class="collapsing">
+                        <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;"/>
+                    </td>
+                    <td class="collapsing" style="border-left: none">
+                        <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
+                    </td>
+                    <td>
+                        @forum.Description
+                    </td>
+                    @if (User.IsInRole("Admin"))
                     {
-                        <tr>
-                            <td class="collapsing">
-                                <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;" />
-                            </td>
-                            <td class="collapsing" style="border-left: none">
-                                <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
-                            </td>
-                            <td>
-                                @forum.Description
-                            </td>
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <td class="collapsing">
-                                    <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
-                                </td>
-                            }
-                        </tr>
+                        <td class="collapsing">
+                            <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
+                        </td>
                     }
-
-                </tbody>
-            </table>
-        </div>
-
-
-
-
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}
