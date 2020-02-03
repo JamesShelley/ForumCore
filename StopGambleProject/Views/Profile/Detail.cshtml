@@ -12,7 +12,7 @@
             <a href="" class="ui red button">Deactivate User</a>
         }
     </h1>
-            <img class="wireframe" src="@Model.ProfileImageUrl">
+    <img class="wireframe" src="@Model.ProfileImageUrl">
 
     @if (User.Identity.Name == Model.UserName)
     {
@@ -28,7 +28,9 @@
     {
         <p>Role: <span style="color:red">Admin</span></p>
     }
+    <p>Post Count: @Model.PostCount</p>
     <p>Rating: @Model.UserRating</p>
     <p>Email: @Model.Email</p>
     <p>Registered: @Model.MemberSince.ToString()</p>
 </div>
+<br/>

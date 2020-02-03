@@ -56,6 +56,15 @@ namespace Project.Service
                  .First();
         }
 
+        public int GetUserPostCount(string id)
+        {
+            return _context.Posts.Where(post => post.User.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum)
+                .Count();
+        }
+
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
             return string.IsNullOrEmpty(searchQuery) ? forum.Posts : forum.Posts.Where

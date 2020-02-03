@@ -9,6 +9,7 @@ namespace Project.Data
     public interface IPost
     {
         Post GetById(int id);
+        int GetUserPostCount(string id);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
         IEnumerable<Post> GetFilteredPosts(string searchQuery);

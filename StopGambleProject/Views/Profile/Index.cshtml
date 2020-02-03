@@ -25,6 +25,9 @@
                     <a asp-contoller="Profile" asp-action="Detail" asp-route-id="@profile.UserId">@profile.UserName (@profile.UserRating) </a>
                 </td>
                 <td>
+                                    Post Count: @profile.PostCount
+                                    </td>
+                <td>
                     Member since: @profile.MemberSince
                 </td>
             </tr>

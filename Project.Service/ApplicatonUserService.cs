@@ -42,7 +42,7 @@ namespace Project.Service
             user.Rating += CalculateUserRating(type, user.Rating);
             return _context.SaveChangesAsync();
         }
-    
+        
         private int CalculateUserRating(Type type, int rating)
         {
             var inc = 0;

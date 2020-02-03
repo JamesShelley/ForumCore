@@ -17,19 +17,22 @@ namespace StopGambleProject.Controllers
         private readonly IApplicationUser _userService;
         private readonly IUpload _uploadService;
         private readonly IConfiguration _configuration;
+        private readonly IPost _postService;
         
-        public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration)
+        public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration, IPost postService)
         {
             _userManager = userManager;
             _userService = userService;
             _uploadService = upload;
             _configuration = configuration;
+            _postService = postService;
         }
 
         public IActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
             {
+
                 var profiles = _userService.GetAll().OrderByDescending(user => user.Rating)
              .Select(u => new ProfileModel
              {
@@ -38,7 +41,8 @@ namespace StopGambleProject.Controllers
                  UserName = u.UserName,
                  ProfileImageUrl = u.ProfileImageUrl,
                  UserRating = u.Rating.ToString(),
-                 MemberSince = u.MemberSince
+                 MemberSince = u.MemberSince,
+                 PostCount = _postService.GetUserPostCount(u.Id)
              });
 
                 var model = new ProfileListModel
@@ -63,6 +67,7 @@ namespace StopGambleProject.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userService.GetById(id);
+                var postCount = _postService.GetUserPostCount(user.Id);
                 var userRoles = _userManager.GetRolesAsync(user).Result;
 
                 var model = new ProfileModel()
@@ -73,7 +78,9 @@ namespace StopGambleProject.Controllers
                     Email = user.Email,
                     ProfileImageUrl = user.ProfileImageUrl,
                     MemberSince = user.MemberSince,
-                    IsAdmin = userRoles.Contains("Admin")
+                    IsAdmin = userRoles.Contains("Admin"),
+                    PostCount = postCount
+                    
                 };
 
                 return View(model);

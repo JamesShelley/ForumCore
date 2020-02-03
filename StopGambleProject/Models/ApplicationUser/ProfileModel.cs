@@ -13,5 +13,6 @@ namespace StopGambleProject.Models.ApplicationUser
         public bool IsAdmin { get; set; }
         public DateTime MemberSince { get; set; }
         public IFormFile ImageUpload { get; set; }
+        public int PostCount { get; set; }
     }
 }
