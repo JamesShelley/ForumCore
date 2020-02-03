@@ -83,7 +83,7 @@ namespace StopGambleProject.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User logged in: " + Input.UserName + " at " + DateTime.Now);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
