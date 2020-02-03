@@ -1,46 +1,35 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
+    ViewData["Title"] = "Manage Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-<partial name="_StatusMessage" model="Model.StatusMessage" />
-<div class="ui center aligned text container">
-    <div class="ui equal width grid">
-        <div class="one column row">
-            <div class="ten wide column">
-                <h2 class="ui teal image header">
-                    <div class="content">
-                        Profile
-                    </div>
-                </h2>
-                <div asp-validation-summary="All" class="text-danger"></div>
+<h4>@ViewData["Title"]</h4>
 
-                <form id="account" method="post" class="ui form">
-                    <div class="ui stacked segment">
-                        <div class="field">
-                            <label asp-for="Username"></label>
-                            <input asp-for="Username" class="form-control" disabled />
-                        </div>
-                        <div class="field">
-                            <label asp-for="Input.PhoneNumber"></label>
-                            <input asp-for="Input.PhoneNumber" class="form-control" />
-                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                        </div>
-                        <div class="field">
-                            <button id="update-profile-button" class="ui teal button" type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                    </div>
+<partial name="_StatusMessage" model="Model.StatusMessage"/>
 
-                    <div class="ui error message"></div>
+<div asp-validation-summary="All" class="text-danger"></div>
 
-                </form>
-            </div>
+<form id="account" method="post" class="ui form">
+    <div class="ui stacked segment">
+        <div class="field">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" disabled/>
+        </div>
+        <div class="field">
+            <label asp-for="Input.PhoneNumber"></label>
+            <input asp-for="Input.PhoneNumber" class="form-control"/>
+            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+        </div>
+        <div class="field">
+            <button id="update-profile-button" class="ui green button" type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
-</div>
 
+    <div class="ui error message"></div>
+
+</form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
 }

@@ -1,36 +1,63 @@
-﻿@using  Project.Data.Models
+﻿@using Project.Data.Models
 @inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }
-<div class="ui bottom attached pushable">
-  <div class="ui visible inverted left vertical sidebar menu">
-    <a class="item @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
-        <i class="home icon"></i>
-        Profile
-    </a>
-    <a class="item @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
-        <i class="block layout icon"></i>
-        Email
-    </a>
-    <a class="item @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
-        <i class="smile icon"></i>
-        Password
-    </a>
-    @if (hasExternalLogins)
-    {
-        <a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">
-            <i class="smile icon"></i>
-            External Logins
-        </a>
-    }
-    <a class="item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
-        <i class="calendar icon"></i>
-        Two-factor authentication
-    </a>
-    <a class="item @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
-        <i class="calendar icon"></i>
-        Personal Data
-    </a>
-</div>
-</div>
+
+    <table class="ui celled table" id="forumIndexTable">
+        <tbody>
+
+        <tr>
+            <td class="collapsing">
+                <a class="item @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+                    <i class="home icon"></i>
+                    Profile
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">
+                <a class="item @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">
+                    <i class="block layout icon"></i>
+                    Email
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">
+                <a class="item @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+                    <i class="smile icon"></i>
+                    Password
+                </a>
+            </td>
+        </tr>
+        @if (hasExternalLogins)
+        {
+            <tr>
+                <td class="collapsing">
+                    <a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">
+                        <i class="smile icon"></i>
+                        External Logins
+                    </a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="collapsing">
+                <a class="item @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
+                    <i class="calendar icon"></i>
+                    Two-factor authentication
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="collapsing">
+                <a class="item @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+                    <i class="calendar icon"></i>
+                    Personal Data
+                </a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
