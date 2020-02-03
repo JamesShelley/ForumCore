@@ -24,9 +24,11 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int forumId)
+        public async Task Delete(int forumId)
         {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            _context.Remove(forum);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Forum> GetAll()
