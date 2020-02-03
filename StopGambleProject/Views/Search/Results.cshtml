@@ -1,5 +1,4 @@
-﻿@using System.Security.Cryptography
-@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @using Project.Data.Models;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -54,7 +53,7 @@
                                     }
                                     <span class="postUser">
                                         , Author:
-                                        <a href="Profile/Detail/@post.AuthorId">
+                                        <a href="/Profile/Detail/@post.AuthorId">
                                             @post.AuthorName
                                         </a>
                                         (@post.AuthorRating)
@@ -62,7 +61,7 @@
                                 </div>
                             </div>
                             <div class="two wide column">
-                                <p>@post.DatePosted</p>
+                                <p>Date: @post.DatePosted</p>
                             </div>
                         </div>
                     </td>
