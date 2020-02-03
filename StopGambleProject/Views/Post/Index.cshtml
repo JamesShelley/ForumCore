@@ -1,17 +1,17 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
-
-<div class="ui container segment left aligned" style="padding-top:20px;">
+    <br />
+<div class="ui raised very padded text container post segment" style="padding-top:20px;">
         <div class="ui grid">
-                <div class="two column row">
-                    <div class="ten wide column">
-                        <h1>
-                            @Model.Title
-                        </h1>
-                    </div>
-                    <div class="two wide column">
-                        <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
-                    </div>
+            <div class="two column row">
+                <div class="three wide column">
+                    <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
                 </div>
+                <div class="thirteen wide column">
+                    <h1>
+                        @Model.Title
+                    </h1>
+                </div>
+            </div>
             </div>
 </div>
 
@@ -27,12 +27,6 @@
                 <div class="ten wide column" style="padding-top: 15px">
                     <h3>
                         @Model.Title
-                        <span style="font-size:14px;">
-                            @if (Model.IsAdmin)
-                            {
-                                <i class="chess queen icon" style="color:gold"></i>
-                            }
-                        </span>
                     </h3>
                 </div>
             </div>
@@ -43,7 +37,12 @@
             </div>
             <div class="one column row">
                 <div class="eleven wide column">
-                    <p> <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created</p>
+                    <p>
+                        @if (Model.IsAdmin)
+                        {
+                            <i class="chess queen icon" style="color:gold"></i>
+                        } <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created
+                    </p>
                 </div>
                 <div class="one wide column">
                     @if (User.Identity.IsAuthenticated)
@@ -71,11 +70,11 @@
                         <div class="ten wide column" style="padding-top: 15px">
                             <h3>
                                 <span style="font-size:14px;">
-                                    <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
                                     @if (@reply.IsAdmin)
                                     {
                                         <i class="chess queen icon" style="color:gold"></i>
                                     }
+                                    <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
                                 </span>
                             </h3>
                         </div>
@@ -101,7 +100,7 @@ else
         @if (User.Identity.IsAuthenticated)
         {
             <p>There are no replies to this post, why not create one?</p>
-            <a class="ui green button"> + Reply</a>
+            <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
         }
         else
         {
