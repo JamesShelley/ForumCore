@@ -19,9 +19,12 @@ namespace StopGambleProject.Controllers
         }
 
         // GET
-        public IActionResult Index(string id)
+        public IActionResult Detail(string id)
         {
-            
+            var model = new ProfileModel()
+            {
+                
+            };
             return View();
         }
     }
