@@ -1,22 +1,14 @@
 ﻿@model StopGambleProject.Models.Forum.ForumIndexModel
+
 <div class="ui center aligned text container">
-
-    <div class="ui grid">
-        <div class="two column row">
-            <div class="thirteen wide column">
-                <h1>
-                    Forum List
-                </h1>
-            </div>
-            @if (User.IsInRole("Admin"))
-            {
-                <div class="three wide column">
-                    <a href="/Forum/Create" class="ui teal button">Create Forum</a>
-                </div>
-            }
-
-        </div>
-    </div>
+    <h1 class="ui huge header">Forum List
+     @if (User.IsInRole("Admin"))
+                {
+                    <div class="three wide column">
+                        <a href="/Forum/Create" class="ui teal button"> Create Forum</a>
+                    </div>
+                }
+    </h1>
 </div>
 
 @if (Model.ForumList.Count() == 0)
