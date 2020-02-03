@@ -1,21 +1,29 @@
 ﻿@{
-    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Manage your account</h1>
-
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
-        </div>
-    </div>
+<div class="ui center aligned text container">
+    <h1 class="ui huge header">Manage your account</h1>
+    <p class="lead">
+      Change your account settings
+    </p>
 </div>
+
+
+<div class="ui main text container" style="padding-top:25px;">
+  <div class="ui grid">
+      <div class="two column row">
+          <div class="eight wide column">
+              <partial name="_ManageNav"/>
+              </div>
+            <div class="eight wide column">
+          @RenderBody()
+          
+                </div>
+      </div>
+    
+  </div>
+  </div>
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
