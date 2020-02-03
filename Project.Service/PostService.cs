@@ -30,9 +30,11 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task Delete(int id)
+        public async Task Delete(int id)
         {
-            throw new NotImplementedException();
+            var postsToBeDeleted = GetForumPostsToBeDeleted(id);
+            _context.Remove(postsToBeDeleted);
+            await _context.SaveChangesAsync();
         }
 
         public Task EditPostContent(int id, string newContent)
@@ -75,6 +77,11 @@ namespace Project.Service
         {
             return GetAll().Where(post => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
         }
+        
+        public IEnumerable<Post> GetForumPostsToBeDeleted(int forumId)
+        {
+            return GetAll().Where(post => post.Forum.Id == forumId);
+        }
 
         public IEnumerable<Post> GetLatestPosts(int numberOfPosts)
         {
@@ -83,8 +90,7 @@ namespace Project.Service
 
         public IEnumerable<Post> GetPostsByForum(int id)
         {
-            return _context.Forums.Where(forum => forum.Id == id).First()
-                .Posts;
+            return _context.Forums.Where(forum => forum.Id == id).First().Posts;
         }
     }
 }

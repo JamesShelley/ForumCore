@@ -42,7 +42,14 @@ namespace Project.Service
             user.Rating += CalculateUserRating(type, user.Rating);
             return _context.SaveChangesAsync();
         }
-        
+
+        public Task DeactivateUser(string id)
+        {
+            var user = GetById(id);
+            user.LockoutEnd = DateTimeOffset.Now .AddYears(1);
+            return _context.SaveChangesAsync();
+        }
+
         private int CalculateUserRating(Type type, int rating)
         {
             var inc = 0;

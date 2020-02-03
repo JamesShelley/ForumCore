@@ -90,6 +90,14 @@ namespace StopGambleProject.Controllers
             }
         }
 
+        public IActionResult LockoutUser(string id)
+        {
+            id = _userManager.GetUserId(User);
+            _userService.DeactivateUser(id);
+
+            return RedirectToAction("Detail", "Profile");
+        }
+
         [HttpPost]
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {

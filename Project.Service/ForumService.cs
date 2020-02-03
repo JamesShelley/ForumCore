@@ -26,6 +26,7 @@ namespace Project.Service
 
         public async Task Delete(int forumId)
         {
+            // Delete the Forum
             var forum = GetById(forumId);
             _context.Remove(forum);
             await _context.SaveChangesAsync();

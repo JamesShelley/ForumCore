@@ -85,9 +85,10 @@ namespace StopGambleProject.Controllers
             }
         }
 
-        public async Task<IActionResult> DeleteForum(Forum forum)
+        public IActionResult DeleteForum(Forum forum)
         {
-            await _forumService.Delete(forum.Id);
+            _forumService.Delete(forum.Id).Wait();
+            _postService.Delete(forum.Id).Wait();
             return RedirectToAction("Index", "Forum");
         }
 
@@ -101,7 +102,7 @@ namespace StopGambleProject.Controllers
                 var blockBlob = UploadForumImage(model.ImageUpload);
                 imageUri = blockBlob.Uri.AbsoluteUri;
             }
-
+            
             var forum = new Forum
             {
                 Title = model.Title,

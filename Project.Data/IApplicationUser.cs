@@ -11,5 +11,7 @@ namespace Project.Data
         IEnumerable<ApplicationUser> GetAll();
         Task SetProfileImage(string id, Uri uri);
         Task UpdateUserRating(string id, Type type);
+
+        Task DeactivateUser(string id);
     }
 }
