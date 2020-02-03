@@ -5,7 +5,7 @@ using Project.Data.Models;
 
 namespace Project.Data
 {
-    public interface IApplicatonUser
+    public interface IApplicationUser
     {
         ApplicationUser GetById(string id);
         IEnumerable<ApplicationUser> GetAll();

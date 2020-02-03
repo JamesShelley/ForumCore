@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Project.Data;
 using Project.Data.Models;
 
 namespace StopGambleProject.Controllers

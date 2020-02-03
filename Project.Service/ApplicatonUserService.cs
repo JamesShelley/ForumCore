@@ -9,7 +9,7 @@ using StopGambleProject.Data;
 
 namespace Project.Service
 {
-    public class ApplicationUserService : IApplicatonUser
+    public class ApplicationUserService : IApplicationUser
     {
         private readonly ApplicationDbContext _context;
 
