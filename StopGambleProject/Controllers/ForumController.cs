@@ -85,6 +85,12 @@ namespace StopGambleProject.Controllers
             }
         }
 
+        public async Task<IActionResult> DeleteForum(Forum forum)
+        {
+            await _forumService.Delete(forum.Id);
+            return RedirectToAction("Index", "Forum");
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddForum(AddForumModel model)
         {

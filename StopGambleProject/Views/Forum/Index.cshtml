@@ -34,6 +34,12 @@
                             <td>
                                 @forum.Description
                             </td>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td class="collapsing">
+                                    <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
+                                </td>
+                            }
                         </tr>
                     }
 
