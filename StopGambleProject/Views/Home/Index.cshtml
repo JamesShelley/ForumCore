@@ -4,28 +4,44 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-    <div class="ui center aligned text container">
-        <h1 class="ui huge header">Forum Core</h1>
-        <p class="lead">
-           Deploy fast, lightweight and feature-rich forum software in minutes.
-        </p>
-        <p class="lead">
-            Plans starting from completely free.
-        </p>
-        @if (SignInManager.IsSignedIn(User))
-        {
+<div class="ui center aligned text container">
+    <h1 class="ui huge header">Forum Core</h1>
+    <p class="lead">
+        Deploy fast, lightweight and feature-rich forum software in minutes.
+    </p>
+    <p class="lead">
+        Plans starting from completely free.
+    </p>
+    @if (SignInManager.IsSignedIn(User))
+    {
         <form asp-controller="Search" asp-action="Search" method="post">
             <div class="ui input">
                 <input asp-for="SearchQuery" style="width:500px" type="text" placeholder="Search all posts">
             </div>
         </form>
-        }
-    </div>
+    }
+</div>
 
 <div class="ui center aligned text container" style="padding-bottom: 25px">
     <h2>Latest Posts </h2>
-    <table class="ui celled table" id="forumIndexTable">
-        <tbody>
+
+    @if (Model.LatestPosts.Count() == 0)
+    {
+        <div class="ui visible message">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p>There doesn't seem to by any posts in the forum yet. Would you like to <a href="/Post/Create">create</a> one?</p>
+            }
+            else
+            {
+                <p>There doesn't seem to by any posts in the forum yet. Would you like to <a href="/Identity/Account/Register">register</a> and create one?</p>
+            }
+        </div>
+    }
+    else
+    {
+        <table class="ui celled table" id="forumIndexTable">
+            <tbody>
             @foreach (var post in Model.LatestPosts)
             {
                 <tr>
@@ -62,7 +78,8 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    }
 
+</div>

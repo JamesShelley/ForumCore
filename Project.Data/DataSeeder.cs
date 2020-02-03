@@ -45,17 +45,18 @@ namespace Project.Data
                 roleStore.CreateAsync(new IdentityRole {Name = "Admin", NormalizedName = "admin"});
             }
 
-            var hasSuperUser = _context.Users.Any(u => u.NormalizedUserName == user.UserName);
+            var hasSuperUser = _context.Users.Any(u => u.UserName == user.UserName);
 
             if (!hasSuperUser)
             {
                  userStore.CreateAsync(user);
+                 userStore.AddToRoleAsync(user, "admin");
                  userStore.AddToRoleAsync(user, "Admin");
             }
 
-             _context.SaveChangesAsync();
+            _context.SaveChangesAsync();
 
-             return Task.CompletedTask;
+            return Task.CompletedTask;
         }
     }
 }

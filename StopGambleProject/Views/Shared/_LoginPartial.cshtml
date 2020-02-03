@@ -11,14 +11,20 @@
         <div class="menu">
             <a class="item" href="/Profile/Detail">My Profile</a>
             <a class="item">Profile Search</a>
-            @if (User.IsInRole("Admin"))
-            {
+        </div>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="ui simple dropdown item">
+            Admin
+            <i class="dropdown icon"></i>
+            <div class="menu">
                 <a class="item">Admin Area</a>
                 <a class="item" href="Forum/Create">Create Forum</a>
                 <a class="item" href="Forum/Create">View Users</a>
-            }
+            </div>
         </div>
-    </div>
+    }
     <a class="item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account Settings</a>
     <form class="form-inline" style="padding-top:5px;" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
         <button type="submit" class="ui red button">Logout</button>
