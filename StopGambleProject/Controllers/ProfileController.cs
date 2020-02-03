@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -48,21 +49,31 @@ namespace StopGambleProject.Controllers
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {
             var userId = _userManager.GetUserId(User);
+
             //Connect to an azure storage account container
-            
+            var connectionString = _configuration.GetConnectionString("AzureStorageAccount");
+
             //Get blob container
-            
+            var container = _uploadService.GetBlobContainer(connectionString);
+
             //Parse the content disposition response header 
+            var contentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
             //Grab the filename
+            var fileName = contentDisposition.FileName.Trim('"');
 
             //Get a reference to the block blob.
+            var blockBlob = container.GetBlockBlobReference(fileName);
 
             //On that block blob, upload the file <- file has been uploaded to the cloud
+            await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
 
             //Set the user profile image to the Uri that is returned from the block blob. 
+            await _userService.SetProfileImage(userId, blockBlob.Uri);
 
             //Redirect to users profile page.
+            return RedirectToAction("Detail", "Profile", new { id = userId });
+            
         }
     }
 }
