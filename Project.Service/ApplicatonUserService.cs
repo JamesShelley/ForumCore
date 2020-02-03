@@ -36,9 +36,27 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task IncrementRating(string id, Type type)
+        public Task UpdateUserRating(string id, Type type)
         {
-            throw new NotImplementedException();
+            var user = GetById(id);
+            user.Rating += CalculateUserRating(type, user.Rating);
+            return _context.SaveChangesAsync();
+        }
+    
+        private int CalculateUserRating(Type type, int rating)
+        {
+            var inc = 0;
+            if (type == typeof(Post))
+            {
+                inc = 2;
+            }
+
+            if (type == typeof(PostReply))
+            {
+                inc = 1;
+            }
+
+            return inc;
         }
     }
 }
