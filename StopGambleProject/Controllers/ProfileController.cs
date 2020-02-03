@@ -34,6 +34,7 @@ namespace StopGambleProject.Controllers
              .Select(u => new ProfileModel
              {
                  Email = u.Email,
+                 UserId = u.Id,
                  UserName = u.UserName,
                  ProfileImageUrl = u.ProfileImageUrl,
                  UserRating = u.Rating.ToString(),
@@ -55,6 +56,10 @@ namespace StopGambleProject.Controllers
 
         public IActionResult Detail(string id)
         {
+            if(id == null)
+            {
+                return Redirect("/");
+            }
             if (User.Identity.IsAuthenticated)
             {
                 var user = _userService.GetById(id);
