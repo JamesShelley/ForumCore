@@ -33,7 +33,7 @@ namespace StopGambleProject.Controllers
             if(User.Identity.IsAuthenticated)
             {
 
-                var profiles = _userService.GetAll().OrderByDescending(user => user.Rating)
+                var profiles = _userService.GetAll().OrderBy(user => user.MemberSince)
              .Select(u => new ProfileModel
              {
                  Email = u.Email,
