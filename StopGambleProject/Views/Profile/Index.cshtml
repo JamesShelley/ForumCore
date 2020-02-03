@@ -1,1 +1,35 @@
-﻿
+﻿@model StopGambleProject.Models.ApplicationUser.ProfileListModel
+<div class="ui center aligned text container">
+
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="thirteen wide column">
+                <h1>
+                    User List
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui center aligned text container" style="padding-bottom: 25px">
+    <table class="ui celled table" id="forumIndexTable">
+        <tbody>
+            @foreach (var profile in Model.Profiles)
+            {
+            <tr>
+                <td class="collapsing">
+                    <img class="ui small image" src="@profile.ProfileImageUrl" style="width:40px;height:40px;border: 1px solid black;" />
+                </td>
+                <td class="collapsing" style="border-left: none">
+                    <a asp-contoller="Profile" asp-action="Detail" asp-route-id="@profile.UserId">@profile.UserName (@profile.UserRating) </a>
+                </td>
+                <td>
+                    Member since: @profile.MemberSince
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

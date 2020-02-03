@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,24 +26,56 @@ namespace StopGambleProject.Controllers
             _configuration = configuration;
         }
 
-        // GET
+        public IActionResult Index()
+        {
+            if(User.Identity.IsAuthenticated)
+            {
+                var profiles = _userService.GetAll().OrderByDescending(user => user.Rating)
+             .Select(u => new ProfileModel
+             {
+                 Email = u.Email,
+                 UserName = u.UserName,
+                 ProfileImageUrl = u.ProfileImageUrl,
+                 UserRating = u.Rating.ToString(),
+                 MemberSince = u.MemberSince
+             });
+
+                var model = new ProfileListModel
+                {
+                    Profiles = profiles
+                };
+
+                return View(model);
+            } else
+            {
+                return Redirect("/Identity/Account/Register");
+            }
+
+        }
+
         public IActionResult Detail(string id)
         {
-            var user = _userService.GetById(id);
-            var userRoles = _userManager.GetRolesAsync(user).Result;
-            
-            var model = new ProfileModel()
+            if (User.Identity.IsAuthenticated)
             {
-                UserId = user.Id,
-                UserName = user.UserName,
-                UserRating = user.Rating.ToString(),
-                Email = user.Email,
-                ProfileImageUrl = user.ProfileImageUrl,
-                MemberSince = user.MemberSince,
-                IsAdmin = userRoles.Contains("Admin")
-            };
-            
-            return View(model);
+                var user = _userService.GetById(id);
+                var userRoles = _userManager.GetRolesAsync(user).Result;
+
+                var model = new ProfileModel()
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    UserRating = user.Rating.ToString(),
+                    Email = user.Email,
+                    ProfileImageUrl = user.ProfileImageUrl,
+                    MemberSince = user.MemberSince,
+                    IsAdmin = userRoles.Contains("Admin")
+                };
+
+                return View(model);
+            } else
+            {
+                return Redirect("/Identity/Account/Register");
+            }
         }
 
         [HttpPost]
