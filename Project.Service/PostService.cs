@@ -62,6 +62,11 @@ namespace Project.Service
                 (post => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
         }
 
+        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
+        {
+            return GetAll().Where(post => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
+        }
+
         public IEnumerable<Post> GetLatestPosts(int numberOfPosts)
         {
             return GetAll().OrderByDescending(post => post.Created).Take(numberOfPosts);

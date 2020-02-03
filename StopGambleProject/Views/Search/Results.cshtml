@@ -3,42 +3,28 @@
 @using Project.Data.Models;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@model StopGambleProject.Models.Forum.ForumTopicModel
+@model StopGambleProject.Models.Search.SearchResultModel
 
 <div class="ui container" style="padding-top:20px;">
-    @if (SignInManager.IsSignedIn(User))
-    {
+    
         <div class="ui grid">
-            <div class="two column row">
-                <div class="eleven wide column">
+            <div class="one column row">
+                <div class="twelve wide column">
                     <h1>
-                        Welcome to the @Model.Forum.Name Forum
+                        Search Results for: @Model.SearchQuery
                     </h1>
-                </div>
-                <div class="two wide column">
-                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
                 </div>
             </div>
         </div>
-    }
-    else
-    {
-        <h1>@Model.Forum.Name Forum</h1>
-        <div class="ui floating teal message">
-        <p>You must be a <a href="/Identity/Account/Register">registered</a> member to post</p>
-        </div>
-    }
-
     @if (Model.Posts.Any())
     {
-    <form asp-controller="Forum" asp-action="Search" method="post">
+    <form asp-controller="Search" asp-action="Search" method="post">
         <div class="ui input">
-            <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
+            <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search all forum posts">
             <button type="submit" class="ui blue button">
                 <i class="search icon"></i>
             </button>
         </div>
-        <input asp-for="Forum.Id" name="id" type="hidden" />
     </form>
         @foreach (var post in Model.Posts)
         {
@@ -87,11 +73,20 @@
     }
     else
     {
+        <form asp-controller="Search" asp-action="Search" method="post">
+            <div class="ui input">
+                <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search all forum posts">
+                <button type="submit" class="ui blue button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+        </form>
+        
         <div class="ui raised very padded text container segment">
-            <h3>It looks like there are no @Model.Forum.Name posts yet.</h3>
+            <h3>@Model.SearchQuery has returned no results</h3>
             @if (SignInManager.IsSignedIn(User))
             {
-                <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+                <p>Maybe you'd like to be the first user to <a asp-controller="Post" asp-action="Create">create</a> a post about this?</p>
             }
         </div>
     }
