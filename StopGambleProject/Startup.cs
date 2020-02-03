@@ -45,6 +45,9 @@ namespace StopGambleProjects
 
             services.AddScoped<IForum, ForumService>();
             services.AddScoped<IPost, PostService>();
+            services.AddScoped<IUpload, UploadService>();
+            services.AddScoped<IApplicationUser, ApplicationUserService>();
+            
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<DataSeeder>();
         }

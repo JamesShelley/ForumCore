@@ -1,6 +1,8 @@
-﻿namespace Project.Service
+﻿using Project.Data;
+
+namespace Project.Service
 {
-    public class UploadService
+    public class UploadService : IUpload
     {
         
     }

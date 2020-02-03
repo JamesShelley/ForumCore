@@ -35,6 +35,7 @@ namespace StopGambleProject.Controllers
                 MemberSince = user.MemberSince,
                 IsAdmin = userRoles.Contains("Admin")
             };
+            
             return View(model);
         }
     }
