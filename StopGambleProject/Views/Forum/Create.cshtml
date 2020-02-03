@@ -2,21 +2,24 @@
 @using Microsoft.AspNetCore.Identity
 @using Project.Data.Models;
 
-<div class="ui center aligned text container">
+<div class="ui text container" style="padding-top:25px;">
     <h1>Create a Forum</h1>
     <form asp-action="AddForum" method="post" class="ui form" id="createForumForm" enctype="multipart/form-data">
+                            <div class="ui stacked segment">
+
         <div class="field">
             <label asp-for="Title"></label>
-            <input asp-for="Title" placeholder="The title of the forum" class="form-control" />
+            <input asp-for="Title" placeholder="The title of the forum" class="form-control"/>
         </div>
         <div class="field">
             <label asp-for="Description"></label>
-            <input asp-for="Description" placeholder="Brief description of the forum topic" class="form-control" placeholder="Forum Name" />
+            <input asp-for="Description" placeholder="Brief description of the forum topic" class="form-control" placeholder="Forum Name"/>
         </div>
-        <label class="ui blue button">
-            Browse <input asp-for="ImageUpload" type="file" style="display: none;" />
-        </label>
-        <button type="submit" class="ui green button" id="submitPostBtn">Submit New Forum</button>
+        <div class="field">
+            Upload Forum Image <input asp-for="ImageUpload" type="file"/>
+        </div>
+                            <button type="submit" class="ui green button" id="submitPostBtn">Create Forum</button>
+                            </div>
     </form>
 </div>>
 
