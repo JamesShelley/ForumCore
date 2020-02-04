@@ -37,9 +37,11 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public Task EditPostContent(int id, string newContent)
+        public async Task EditPostContent(int id, string newContent)
         {
-            throw new NotImplementedException();
+            var post = GetById(id);
+            _context.Update(post);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Post> GetAll()

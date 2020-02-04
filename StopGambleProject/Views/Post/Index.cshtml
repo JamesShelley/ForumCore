@@ -1,18 +1,18 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
-    <br />
+<br />
 <div class="ui raised very padded text container post segment" style="padding-top:20px;">
-        <div class="ui grid">
-            <div class="two column row">
-                <div class="three wide column">
-                    <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
-                </div>
-                <div class="thirteen wide column">
-                    <h1>
-                        @Model.Title
-                    </h1>
-                </div>
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="three wide column">
+                <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
+            </div>
+            <div class="thirteen wide column">
+                <h1>
+                    @Model.Title
+                </h1>
             </div>
         </div>
+    </div>
 </div>
 
 <div style="padding-top:25px;">
@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="one column row">
-                <div class="eleven wide column">
+                <div class="ten wide column">
                     <p>
                         @if (Model.IsAdmin)
                         {
@@ -44,20 +44,29 @@
                         } <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created
                     </p>
                 </div>
-                <div class="one wide column">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
-                    }
-                </div>
             </div>
-             <div class="one column row">
-                <div class="one wide column">
-                    @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                    {
-                        <button class="ui button red create_btn" type="button" id="test">Delete</button>
-                    }
-                </div>
+            <div class="ui fitted divider"></div>
+
+            <div class="three column row">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="two wide column">
+
+                        <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
+                    </div>
+                }
+                @if (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <div class="two wide column">
+                        <button class="ui blue button editButton" type="button" id="editPostButton">Edit</button>
+                    </div>
+                }
+                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                {
+                    <div class="two wide column">
+                        <button class="ui button red deleteButton" type="button" id="deletePostButton">Delete</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -97,9 +106,27 @@
                             <p> @reply.Created</p>
                         </div>
                     </div>
+                    <div class="ui fitted divider"></div>
+
+                    <div class="two column row">
+                        @if (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <div class="two wide column">
+                                <button class="ui blue button" type="button" id="editReplyButton">Edit</button>
+                            </div>
+                        }
+                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                        {
+                            <div class="two wide column">
+                                <button class="ui button red deleteButton" type="button" id="deleteReplyButton">Delete</button>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
+
+
     }
 }
 else
@@ -118,8 +145,38 @@ else
 }
 <br>
 
-@*Modal Popup*@
-<div class="ui modal test">
+@*Modal Edit Post Popup*@
+<div class="ui modal editPost">
+    <i class="close icon"></i>
+    <div class="header">
+        Edit post
+    </div>
+    <div class="image content">
+        <div class="description">
+            <form asp-action="EditPost" method="post" class="ui form" id="editPostForm">
+                <div class="field">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" class="form-control" />
+                </div>
+                <div class="field">
+                    <label asp-for="Content"></label>
+                    <textarea asp-for="Content" class="form-control" rows="20" placeholder="Your post..." style="box-sizing: border-box; border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;resize: none;" />@Model.Content</textarea>
+                </div>
+                <div class="actions">
+                    <div class="ui black deny button">
+                        Cancel
+                    </div>
+                    <a asp-controller="Post" asp-action="EditPost" asp-route-id="@Model.Id" class="ui blue button">Edit Post</a>
+                </div>
+                <input asp-for="ForumId" type="hidden" />
+            </form>
+        </div>
+    </div>
+</div>
+@*End Edit popup *@
+
+@*Modal Delete Post Popup*@
+<div class="ui modal deletePost">
     <i class="close icon"></i>
     <div class="header">
         Delete post
@@ -137,4 +194,5 @@ else
         <a asp-controller="Post" asp-action="DeletePost" asp-route-id="@Model.Id" class="ui red button">Delete</a>
     </div>
 </div>
-@*End pop *@
+@*End Delete popup *@
+

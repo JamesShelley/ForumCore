@@ -6,14 +6,41 @@ $(document).ready(function () {
     $(".ui.toggle.button").click(function () {
         $(".mobile.only.grid .ui.vertical.menu").toggle(100);
     });
-    $("#test").click(function(){
-        $(".test").modal('show');
+
+    // Post Modals
+
+    $("#deletePostButton").click(function(){
+        $(".deletePost").modal('show');
     });
-    $(".test").modal({
+    $(".deletePost").modal({
+        closable: true
+    });
+    $("#editPostButton").click(function () {
+        $(".editPost").modal('show');
+    });
+    $(".editPost").modal({
+        closable: true
+    });
+
+    // Post Reply Modals
+    $(".deleteReplyButton").click(function () {
+        $(".deleteReply").modal('show');
+    });
+    $(".deleteReply").modal({
+        closable: true
+    });
+    $(".editReplyButton").click(function () {
+        $(".editReply").modal('show');
+    });
+    $(".editReply").modal({
         closable: true
     });
 });
 
 $('.ui.accordion')
     .accordion()
-;
+    ;
+
+$('.ui.modal')
+    .modal()
+    ;
