@@ -23,7 +23,7 @@ namespace Project.Service
             _context.Add(post);
             await _context.SaveChangesAsync();
         }
-
+        
         public async Task AddReply(PostReply reply)
         {
             _context.PostReplies.Add(reply);

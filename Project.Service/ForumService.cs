@@ -38,9 +38,25 @@ namespace Project.Service
             return _context.Forums.Include(Forum => Forum.Posts);
         }
 
-        public IEnumerable<ApplicationUser> GetAllActiveUsers()
+        public IEnumerable<ApplicationUser> GetActiveUsers(int id)
         {
-            throw new NotImplementedException();
+            var posts = GetById(id).Posts;
+            if (posts != null || !posts.Any())
+            {
+                var postUsers = posts.Select(p => p.User);
+                var replyUsers = posts.SelectMany(p => p.Replies).Select(r => r.User);
+                return postUsers.Union(replyUsers).Distinct();
+            }
+
+            return new List<ApplicationUser>();
+        }
+        
+        public bool HasRecentPost(int id)
+        {
+            const int hoursAgo = 12;
+            var window = DateTime.Now.AddHours(-hoursAgo);
+
+            return GetById(id).Posts.Any(post => post.Created > window);
         }
 
         public Forum GetById(int id)

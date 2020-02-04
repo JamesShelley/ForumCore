@@ -39,11 +39,21 @@ else
                         <img class="ui small image" src="@forum.ImageUrl" style="width:40px;height:40px;"/>
                     </td>
                     <td class="collapsing" style="border-left: none">
-                        <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name </a>
+                        <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name
+                         @if (forum.HasRecentPost)
+                         {
+                             <i class="fire icon" style="color:red"></i>
+                         }
+                            </a>
                     </td>
                     <td>
                         @forum.Description
                     </td>
+                    <td>
+                       <i class="envelope open outline icon"></i> Posts: @forum.NumberOfPosts <br/>
+                        <i class="user icon"></i> Users: @forum.NumberOfUsers
+                    </td>
+                   
                     @if (User.IsInRole("Admin"))
                     {
                         <td class="collapsing">
