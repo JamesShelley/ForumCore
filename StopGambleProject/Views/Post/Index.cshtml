@@ -1,13 +1,13 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
 <br />
 
-<div class="ui raised very padded text container post segment" style="padding-top:20px;">
+<div class="ui raised padded text container post segment" style="padding-top:20px;">
     <div class="ui grid">
         <div class="two column row">
-            <div class="three wide column">
+            <div class="two wide column">
                 <a class="ui inverted primary button" href="/Forum/Topic/@Model.ForumId">Back to @Model.ForumName</a>
             </div>
-            <div class="thirteen wide column">
+            <div class="fourteen wide column">
                 <h1>
                     @Model.Title
                 </h1>
@@ -109,16 +109,10 @@
                     </div>
                     <div class="ui fitted divider"></div>
 
-                    <div class="two column row">
-                        @if (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                        {
-                            <div class="two wide column">
-                                <button class="ui blue button" type="button" id="editReplyButton">Edit</button>
-                            </div>
-                        }
+                    <div class="one column row">
                         @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
                         {
-                            <div class="two wide column">
+                            <div class="one wide column">
                                 <button class="ui button red deleteButton" type="button" id="deleteReplyButton">Delete</button>
                             </div>
                         }
@@ -161,7 +155,7 @@ else
                 </div>
                 <div class="field">
                     <label asp-for="Content"></label>
-                    <textarea asp-for="Content" class="form-control" rows="20" placeholder="Your post..." />@Model.Content</textarea>
+                    <textarea asp-for="Content" class="form-control" rows="20" placeholder="Your post...">@Model.Content</textarea>
                 </div>
                 <div class="actions">
                     <div class="ui black deny button">
@@ -197,4 +191,3 @@ else
     </div>
 </div>
 @*End Delete popup *@
-
