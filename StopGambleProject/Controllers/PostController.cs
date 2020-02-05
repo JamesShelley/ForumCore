@@ -92,8 +92,8 @@ namespace StopGambleProject.Controllers
 
         public async Task<IActionResult> Edit(NewPostModel model)
         {
-            await _postService.EditPostContent(model.Id, model.Content, model.Title);
-            return Redirect("/");
+            await _postService.EditPostContent(model.Id, model.Content, model.Title);            
+            return RedirectToAction("Index","Post", new { id = model.Id });
         }
 
         private Post BuildPost(NewPostModel model, ApplicationUser user)
