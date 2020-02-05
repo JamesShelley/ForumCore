@@ -7,6 +7,14 @@ $(document).ready(function () {
         $(".mobile.only.grid .ui.vertical.menu").toggle(100);
     });
 
+    // Delete Forum Models
+    $("#deleteForumButton").click(function () {
+        $(".deleteForum").modal('show');
+    });
+    $(".deleteForum").modal({
+        closable: true
+    });
+
     // Post Modals
 
     $("#deletePostButton").click(function(){

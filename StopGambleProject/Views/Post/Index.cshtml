@@ -1,5 +1,6 @@
 ﻿@model StopGambleProject.Models.Post.PostIndexModel
 <br />
+
 <div class="ui raised very padded text container post segment" style="padding-top:20px;">
     <div class="ui grid">
         <div class="two column row">
@@ -153,22 +154,23 @@ else
     </div>
     <div class="image content">
         <div class="description">
-            <form asp-action="EditPost" method="post" class="ui form" id="editPostForm">
+            <form asp-action="Edit" method="post" class="ui form" id="editPostForm">
                 <div class="field">
                     <label asp-for="Title"></label>
                     <input asp-for="Title" class="form-control" />
                 </div>
                 <div class="field">
                     <label asp-for="Content"></label>
-                    <textarea asp-for="Content" class="form-control" rows="20" placeholder="Your post..."/>@Model.Content</textarea>
+                    <textarea asp-for="Content" class="form-control" rows="20" placeholder="Your post..." />@Model.Content</textarea>
                 </div>
                 <div class="actions">
                     <div class="ui black deny button">
                         Cancel
                     </div>
-                    <a asp-controller="Post" asp-action="EditPost" asp-route-id="@Model.Id" class="ui blue button">Edit Post</a>
+                    <button type="submit" class="ui blue button">Edit Post</a>
                 </div>
                 <input asp-for="ForumId" type="hidden" />
+                <input asp-for="Id" type="hidden" />
             </form>
         </div>
     </div>

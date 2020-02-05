@@ -90,12 +90,19 @@ namespace StopGambleProject.Controllers
             return RedirectToAction("Index","Post", new { id = post.Id });
         }
 
+        public async Task<IActionResult> Edit(NewPostModel model)
+        {
+            await _postService.EditPostContent(model.Id, model.Content, model.Title);
+            return Redirect("/");
+        }
+
         private Post BuildPost(NewPostModel model, ApplicationUser user)
         {
             var forum = _forumService.GetById(model.ForumId);
 
             return new Post
             {
+                Id = model.Id,
                 Title = model.Title,
                 Content = model.Content,
                 Created = DateTime.Now,

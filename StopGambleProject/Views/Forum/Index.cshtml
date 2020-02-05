@@ -57,13 +57,13 @@ else
                     @if (User.IsInRole("Admin"))
                     {
                         <td class="collapsing">
-                            <button class="ui button red create_btn" type="button" id="test">Delete Forum</button>
+                            <button class="ui button red create_btn" type="button" id="deleteForumButton">Delete Forum</button>
                         </td>
                     }
                 </tr>
                 
                 @*Modal Popup*@
-                <div class="ui modal test">
+                <div class="ui modal deleteForum">
                     <i class="close icon"></i>
                     <div class="header">
                         Delete forum

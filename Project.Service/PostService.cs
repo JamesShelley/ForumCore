@@ -39,6 +39,9 @@ namespace Project.Service
         public async Task EditPostContent(int id, string newContent, string newTitle)
         {
             var post = GetById(id);
+            post.Content = newContent;
+            post.Title = newTitle;
+            _context.Posts.Update(post);
             await _context.SaveChangesAsync();
         }
 
