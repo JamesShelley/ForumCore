@@ -40,51 +40,25 @@ else
                     </td>
                     <td class="collapsing" style="border-left: none">
                         <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name
-                         @if (forum.HasRecentPost)
-                         {
-                             <i class="fire icon" style="color:red"></i>
-                         }
-                            </a>
+                            @if (forum.HasRecentPost)
+                            {
+                                <i class="fire icon" style="color:red"></i>
+                            }
+                        </a>
                     </td>
                     <td>
                         @forum.Description
                     </td>
                     <td>
-                       <i class="envelope open outline icon"></i> Posts: @forum.NumberOfPosts <br/>
+                        <i class="envelope open outline icon"></i> Posts: @forum.NumberOfPosts <br/>
                         <i class="user icon"></i> Users: @forum.NumberOfUsers
                     </td>
-                   
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <td class="collapsing">
-                            <button class="ui button red create_btn" type="button" id="deleteForumButton">Delete Forum</button>
-                        </td>
-                    }
                 </tr>
-                
-                @*Modal Popup*@
-                <div class="ui modal deleteForum">
-                    <i class="close icon"></i>
-                    <div class="header">
-                        Delete forum
-                    </div>
-                    <div class="image content">
-                        <div class="description">
-                            <div class="ui header">@forum.Name</div>
-                            <p>@forum.Description</p>
-                        </div>
-                    </div>
-                    <div class="actions">
-                        <div class="ui black deny button">
-                            Cancel
-                        </div>
-                            <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@forum.Id" class="ui red button">Delete Forum</a>
-                    </div>
-                </div>
-        @*End pop *@
             }
+          
             </tbody>
         </table>
     </div>
+    
 }
-
+ 

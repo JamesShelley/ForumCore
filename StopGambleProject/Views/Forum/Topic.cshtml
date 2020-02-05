@@ -5,96 +5,123 @@
 @inject UserManager<ApplicationUser> UserManager
 @model StopGambleProject.Models.Forum.ForumTopicModel
 
-    <div class="ui container" style="padding-top:20px;">
-        @if (SignInManager.IsSignedIn(User))
-        {
-            <div class="ui grid">
-                <div class="two column row">
-                    <div class="thirteen wide column">
-                        <h1>
-                            Welcome to the @Model.Forum.Name Forum
-                        </h1>
-                    </div>
-                    <div class="three wide column">
-                        <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
-                    </div>
+<div class="ui container" style="padding-top:20px;">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div class="ui grid">
+            <div class="two column row">
+                <div class="twelve wide column">
+                    <h1>
+                        Welcome to the @Model.Forum.Name Forum
+                    </h1>
                 </div>
-            </div>
-        }
-        else
-        {
-            <h1>@Model.Forum.Name Forum</h1>
-            <div class="ui floating teal message">
-                <p>You must be a <a href="/Identity/Account/Register">registered</a> member to post</p>
-            </div>
-        }
-        <br>
-        @if (Model.Posts.Any())
-        {
-            <form asp-controller="Forum" asp-action="Search" method="post">
-                <div class="ui input">
-                    <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
-                    <button type="submit" class="ui blue button">
-                        <i class="search icon"></i>
-                    </button>
+                <div class="two wide column">
+                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
                 </div>
-                <input asp-for="Forum.Id" name="id" type="hidden" />
-            </form>
-            <br>
-            @foreach (var post in Model.Posts)
-            {
-                <table class="ui celled table" id="forumIndexTable">
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="ui grid">
-                                    <div class="one wide column">
-                                        <img class="ui small image" src="@post.AuthorImageUrl" style="width:40px;height:40px;">
-                                    </div>
-                                    <div class="eleven wide column">
-
-                                        <a href="/Post/Index/@post.Id">@post.Title</a>
-                                        <div class="postSubTitle">
-                                            @if (post.RepliesCount == 1)
-                                            {
-                                                <span>@post.RepliesCount Reply </span>
-                                            }
-                                            @if (post.RepliesCount == 0)
-                                            {
-                                                <span>No Replies </span>
-                                            }
-                                            else
-                                            {
-                                                <span>@post.RepliesCount Replies </span>
-                                            }
-                                            <span class="postUser">
-                                                , Author:
-                                                <a href="Profile/Detail/@post.AuthorId">
-                                                    @post.AuthorName
-                                                </a>
-                                                (@post.AuthorRating)
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="three wide column">
-                                        <p>@post.DatePosted</p>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-            <br />
-        }
-        else
-        {
-            <div class="ui raised very padded text container segment">
-                <h3>It looks like there are no @Model.Forum.Name posts yet.</h3>
-                @if (SignInManager.IsSignedIn(User))
+                @if (User.IsInRole("Admin"))
                 {
-                    <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+                    <div class="two wide column">
+                        <button class="ui button red create_btn" type="button" id="deleteForumButton">Delete Forum</button>
+                    </div>
                 }
             </div>
+        </div>
+    }
+    else
+    {
+        <h1>@Model.Forum.Name Forum</h1>
+        <div class="ui floating teal message">
+            <p>You must be a <a href="/Identity/Account/Register">registered</a> member to post</p>
+        </div>
+    }
+    <br>
+    @if (Model.Posts.Any())
+    {
+        <form asp-controller="Forum" asp-action="Search" method="post">
+            <div class="ui input">
+                <input asp-for="SearchQuery" style="width:500px;" type="text" placeholder="Search @Model.Forum.Name posts">
+                <button type="submit" class="ui blue button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+            <input asp-for="Forum.Id" name="id" type="hidden" />
+        </form>
+        <br>
+        @foreach (var post in Model.Posts)
+        {
+            <table class="ui celled table" id="forumIndexTable">
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="ui grid">
+                            <div class="one wide column">
+                                <img class="ui small image" src="@post.AuthorImageUrl" style="width:40px;height:40px;">
+                            </div>
+                            <div class="eleven wide column">
+
+                                <a href="/Post/Index/@post.Id">@post.Title</a>
+                                <div class="postSubTitle">
+                                    @if (post.RepliesCount == 1)
+                                    {
+                                        <span>@post.RepliesCount Reply </span>
+                                    }
+                                    @if (post.RepliesCount == 0)
+                                    {
+                                        <span>No Replies </span>
+                                    }
+                                    else
+                                    {
+                                        <span>@post.RepliesCount Replies </span>
+                                    }
+                                    <span class="postUser">
+                                        , Author:
+                                        <a href="Profile/Detail/@post.AuthorId">
+                                            @post.AuthorName
+                                        </a>
+                                        (@post.AuthorRating)
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="three wide column">
+                                <p>@post.DatePosted</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         }
+        <br />
+    }
+    else
+    {
+        <div class="ui raised very padded text container segment">
+            <h3>It looks like there are no @Model.Forum.Name posts yet.</h3>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p>How about you <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">create</a> a post?</p>
+            }
+        </div>
+    }
+</div>
+
+@*Modal Popup*@
+<div class="ui modal deleteForum">
+    <i class="close icon"></i>
+    <div class="header">
+        Delete forum
     </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui header">@Model.Forum.Name</div>
+            <p>@Model.Forum.Description</p>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancel
+        </div>
+        <a asp-controller="Forum" asp-action="DeleteForum" asp-route-id="@Model.Forum.Id" class="ui red button">Delete Forum</a>
+    </div>
+</div>
+@*End pop *@
