@@ -13,7 +13,6 @@ namespace StopGambleProject.Controllers
 {
     public class PostController : Controller
     {
-       
         private readonly IForum _forumService;
         private readonly IPost _postService;
         private readonly IApplicationUser _userService;

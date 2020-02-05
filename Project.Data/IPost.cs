@@ -18,7 +18,7 @@ namespace Project.Data
         IEnumerable<Post> GetForumPostsToBeDeleted(int forumId);
         Task Add(Post post);
         Task Delete(int id);
-        Task EditPostContent(int id, string newContent);
+        Task EditPostContent(int id, string newContent, string newTitle);
         Task AddReply(PostReply reply);
     }
 }

@@ -12,7 +12,6 @@ namespace Project.Service
     {
 
         private readonly ApplicationDbContext _context;
-
         public PostService(ApplicationDbContext context)
         {
             _context = context;
@@ -37,10 +36,9 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
-        public async Task EditPostContent(int id, string newContent)
+        public async Task EditPostContent(int id, string newContent, string newTitle)
         {
             var post = GetById(id);
-            _context.Update(post);
             await _context.SaveChangesAsync();
         }
 
