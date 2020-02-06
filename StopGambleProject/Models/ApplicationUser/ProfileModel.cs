@@ -17,6 +17,7 @@ namespace StopGambleProject.Models.ApplicationUser
         public DateTime MemberSince { get; set; }
         public IFormFile ImageUpload { get; set; }
         public int PostCount { get; set; }
-        public IEnumerable<Project.Data.Models.Post> UserPosts { get; set; }
+        
+        public IEnumerable<PostListingModel> UserPosts { get; set; }
     }
 }

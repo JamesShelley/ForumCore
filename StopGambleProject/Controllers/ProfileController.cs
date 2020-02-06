@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.ApplicationUser;
+using StopGambleProject.Models.Forum;
+using StopGambleProject.Models.Post;
 
 namespace StopGambleProject.Controllers
 {
@@ -32,7 +34,7 @@ namespace StopGambleProject.Controllers
         {
             if(User.Identity.IsAuthenticated)
             {
-
+                
                 var profiles = _userService.GetAll().OrderBy(user => user.MemberSince)
              .Select(u => new ProfileModel
              {
@@ -69,7 +71,20 @@ namespace StopGambleProject.Controllers
                 var user = _userService.GetById(id);
                 var postCount = _postService.GetUserPostCount(user.Id);
                 var userRoles = _userManager.GetRolesAsync(user).Result;
-
+                
+                var latestPosts = _postService.GetLatestPosts(5);
+                var usersPosts = _userService.GetUserPosts(id, 5);
+                var posts = usersPosts.Select(post => new PostListingModel
+                {
+                    Id = post.Id,
+                    Title = post.Title,
+                    AuthorName = post.User.UserName,
+                    AuthorId = post.User.Id,
+                    AuthorRating = post.User.Rating,
+                    DatePosted = post.Created.ToString(),
+                    RepliesCount = post.Replies.Count(),
+                });
+                
                 var model = new ProfileModel()
                 {
                     UserId = user.Id,
@@ -81,7 +96,7 @@ namespace StopGambleProject.Controllers
                     IsAdmin = userRoles.Contains("Admin"),
                     IsModerator = userRoles.Contains("Moderator"),
                     PostCount = postCount,
-                    UserPosts = _userService.GetUserPosts(user.Id)
+                    UserPosts = posts
                     
                 };
 
@@ -90,6 +105,16 @@ namespace StopGambleProject.Controllers
             {
                 return Redirect("/Identity/Account/Register");
             }
+        }
+        
+        private PostListingModel GetUserPostsListing(string id)
+        {
+            var userPosts = _userService.GetUserPosts(id);
+
+            return new PostListingModel
+            {
+                Title = "cool",
+            };
         }
 
         public IActionResult LockoutUser(string id)

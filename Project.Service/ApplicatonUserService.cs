@@ -58,6 +58,14 @@ namespace Project.Service
                 .Include(post => post.Replies).ThenInclude(reply => reply.User)
                 .Include(post => post.Forum);
         }
+        
+        public IEnumerable<Post> GetUserPosts(string id, int postCount)
+        {
+            return _context.Posts.Where(post => post.User.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum).Take(postCount);
+        }
 
         private int CalculateUserRating(Type type, int rating)
         {

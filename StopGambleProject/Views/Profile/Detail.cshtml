@@ -60,9 +60,35 @@
                 </div>
             </div>
             <div class="eight wide column">
-                <h1>  Profile Feed </h1>
-                @Model.UserPosts
-                </div>
+                <h1> Latest Posts</h1>
+                 <table class="ui celled table" id="forumIndexTable">
+                 <tbody>
+                 @foreach (var post in Model.UserPosts)
+                 {
+                     <tr>
+                         <td>
+                             <div class="ui grid">
+                                 <div class="twelve wide column">
+
+                                     <a href="/Post/Index/@post.Id">@post.Title</a>
+                                     <div class="postSubTitle">
+                                         @if (post.RepliesCount == 0)
+                                         {
+                                             <span>No Replies </span>
+                                         }
+                                         else
+                                         {
+                                             <span>Replies: @post.RepliesCount </span>
+                                         }
+                                     </div>
+                                 </div>
+                             </div>
+                         </td>
+                     </tr>
+                 }
+                 </tbody>
+                 </table>
+            </div>
             
             </div>
     </div>
