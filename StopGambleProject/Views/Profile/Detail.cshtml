@@ -23,6 +23,7 @@
                              @if (User.Identity.Name == Model.UserName)
                                 {
                                     <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" class="center aligned">
+                                        <a type="submit" class="ui red button">Remove</a>
                                         <label class="ui blue button">
                                             Browse <input type="file" name="file" style="display: none"/>
                                         </label>
@@ -59,7 +60,8 @@
                 </div>
             </div>
             <div class="eight wide column">
-                      <h1>  Profile Feed </h1>
+                <h1>  Profile Feed </h1>
+                @Model.UserPosts
                 </div>
             
             </div>

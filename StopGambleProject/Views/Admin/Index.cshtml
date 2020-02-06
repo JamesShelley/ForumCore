@@ -2,14 +2,58 @@
     ViewData["Title"] = "Admin";
 }
 
-<div class="ui container" style="padding-top:20px;">
+<div class="ui container aligned text container" style="padding-top:20px;">
     <h1>Admin control panel</h1>
-    <p>
-        From here you can manage all forum functionality.
-    </p>
-    
+    <h4>
+                <i class="settings icon"></i>
+                Forum Content - configure general settings of your forum.
+    </h4>
     <div class="ui grid">
-     @* Row 1 start *@
+      @* Row 1 start *@
+      <div class="three column row">
+        <div class="ui cards">
+          <div class="card">
+            <div class="content">
+              <div class="header"> <i class="home icon"></i>Home content</div>
+              <div class="description">
+                Manage forum settings such as the name, description etc.
+              </div>
+            </div>
+            <div class="ui bottom attached green button">
+              <i class="add icon"></i>
+              <a href="/Forum/Create" style="color:white">Edit settings</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="header"><i class="info icon"></i>About Content</div>
+              <div class="description">
+                Change the content that appears on the forum about us page.
+              </div>
+            </div>
+            <div class="ui bottom attached green button">
+              <i class="add icon"></i>
+              <a href="/Admin/ModeratorPanel" style="color:white">Edit about</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="content">
+              <div class="header"><i class="help icon"></i>Help</div>
+              <div class="description">
+                Submit a help request to the Forum Core team. 
+              </div>
+            </div>
+            <div class="ui bottom attached green button">
+              <i class="add icon"></i>
+              <a href="/Forum/Create" style="color:white">Submit request</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <h4>
+      <i class="laptop icon"></i>
+      Forum Settings - manage all of the relevant settings of your forum.
+    </h4>
         <div class="three column row">
           <div class="ui cards">
             <div class="card">
@@ -40,7 +84,7 @@
               <div class="content">
                 <div class="header"><i class="arrow circle up icon"></i>Rating system</div>
                 <div class="description">
-                  From here you can change how many points are awarded to a user for posting or replying to a post. 
+                  From here you can change how many points are awarded to a user for posting or replying to a post.
                 </div>
               </div>
               <div class="ui bottom attached green button">
@@ -50,50 +94,50 @@
             </div>
           </div>
         </div>
-      @* Row 1 end *@
-      
-      @* Row 2 start *@
-      <div class="three column row">
-        <div class="ui cards">
-                    <div class="card">
-                      <div class="content">
-                        <div class="header"><i class="globe icon"></i>Recent Post Count</div>
-                        <div class="description">
-                          Change how many recent posts show on the homepage.
-                        </div>
-                      </div>
-                      <div class="ui bottom attached green button">
-                        <i class="add icon"></i>
-                        <a href="/Forum/Create" style="color:white">Change Total</a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="content">
-                        <div class="header"><i class="clock icon"></i>Forum Activity</div>
-                        <div class="description">
-                          Change how long it takes for a forum to become inactive after its most recent post.
-                        </div>
-                      </div>
-                      <div class="ui bottom attached green button">
-                        <i class="add icon"></i>
-                        <a href="/Forum/Create" style="color:white">Change Activity</a>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="content">
-                        <div class="header"><i class="star icon"></i>Donation Settings</div>
-                        <div class="description">
-                          Configure your forum to be enable users to donate for certain perks.
-                        </div>
-                      </div>
-                      <div class="ui bottom attached green button">
-                        <i class="add icon"></i>
-                        <a href="/Forum/Create" style="color:white">Configure Donations</a>
-                      </div>
-                    </div>
-                  </div>
+        @* Row 1 end *@
+
+        @* Row 2 start *@
+        <div class="three column row">
+          <div class="ui cards">
+            <div class="card">
+              <div class="content">
+                <div class="header"><i class="globe icon"></i>Recent Post Count</div>
+                <div class="description">
+                  Change how many recent posts show on the homepage.
+                </div>
+              </div>
+              <div class="ui bottom attached green button">
+                <i class="add icon"></i>
+                <a href="/Forum/Create" style="color:white">Change Total</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <div class="header"><i class="clock icon"></i>Forum Activity</div>
+                <div class="description">
+                  Change how long it takes for a forum to become inactive after its most recent post.
+                </div>
+              </div>
+              <div class="ui bottom attached green button">
+                <i class="add icon"></i>
+                <a href="/Forum/Create" style="color:white">Change Activity</a>
+              </div>
+            </div>
+            <div class="card">
+              <div class="content">
+                <div class="header"><i class="star icon"></i>Donation Settings</div>
+                <div class="description">
+                  Configure your forum to be enable users to donate for certain perks.
+                </div>
+              </div>
+              <div class="ui bottom attached green button">
+                <i class="add icon"></i>
+                <a href="/Forum/Create" style="color:white">Configure Donations</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        @* Row 2 end *@
       </div>
-       @* Row 2 end *@
-      </div>
-    
 </div>
+<br>

@@ -77,10 +77,11 @@ namespace StopGambleProject.Controllers
                     UserRating = user.Rating.ToString(),
                     Email = user.Email,
                     ProfileImageUrl = user.ProfileImageUrl,
-                    MemberSince = user.MemberSince,
+                    MemberSince = user.MemberSince.Date,
                     IsAdmin = userRoles.Contains("Admin"),
                     IsModerator = userRoles.Contains("Moderator"),
-                    PostCount = postCount
+                    PostCount = postCount,
+                    UserPosts = _userService.GetUserPosts(user.Id)
                     
                 };
 

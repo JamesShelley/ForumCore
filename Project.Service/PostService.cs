@@ -69,7 +69,7 @@ namespace Project.Service
                 .Include(post => post.Forum)
                 .Count();
         }
-
+        
         public IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery)
         {
             return string.IsNullOrEmpty(searchQuery) ? forum.Posts : forum.Posts.Where

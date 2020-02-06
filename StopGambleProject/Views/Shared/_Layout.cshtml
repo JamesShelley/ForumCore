@@ -14,7 +14,7 @@
 <body id="root" class="Site">
     <header>
         <div class="ui tablet computer only padded grid">
-            <div class="ui borderless fluid huge inverted teal menu">
+            <div class="ui borderless fluid huge inverted blue menu">
                 <div class="ui container">
                     <a class="header item" asp-controller="Home" asp-action="Index"><strong>Forum Core</strong></a>
                     <a class="item" asp-controller="Home" asp-action="About">About</a>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="ui mobile only padded grid">
-            <div class="ui borderless fluid huge inverted teal menu">
+            <div class="ui borderless fluid huge inverted blue menu">
                 <a class="header item" href="#root">Forum Core</a>
                 <div class="right menu">
                     <div class="item">
@@ -35,7 +35,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="ui vertical borderless fluid inverted teal menu">
+                <div class="ui vertical borderless fluid inverted blue menu">
                     <a class="active item" asp-controller="Home" asp-action="Index">Forum Core</a>
                     <a class="item" href="#root">About</a>
                     <a class="item" asp-controller="Forum" asp-action="Index">Forum</a>
@@ -48,7 +48,7 @@
         @RenderBody()
     </main>
     <footer>
-        <div class="ui inverted teal vertical footer segment">
+        <div class="ui inverted blue vertical footer segment">
             <div class="ui container">
                 <div class="ui stackable inverted divided equal height stackable grid">
                     <div class="seven wide column">
@@ -60,9 +60,8 @@
                     <div class="three wide column">
                         <h4 class="ui inverted header">Forum</h4>
                         <div class="ui inverted link list">
-                            <a class="item" href="/About">About us</a>
-                            <a class="item" href="/Plans/Index">Plans</a>
-                            <a class="item" href="/Forum">View Example Forum</a>
+                            <a class="item" href="/Home/About">About us</a>
+                            <a class="item" href="/Forum">View Forums</a>
                         </div>
                     </div>
                     <div class="three wide column">
@@ -70,8 +69,8 @@
                         <div class="ui inverted link list">
                             @if (SignInManager.IsSignedIn(User))
                             {
-                                <a class="item" href="#root">Profile</a>
-                                <a class="item" href="#root">Account settings</a>
+                                <a class="item" href="/Profile/Detail/@UserManager.GetUserId(User)">Profile</a>
+                                <a class="item" href="/Identity/Account/Manage">Account settings</a>
                             }
                             else
                             {

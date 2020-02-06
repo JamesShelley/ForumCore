@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Data;
@@ -48,6 +49,14 @@ namespace Project.Service
             var user = GetById(id);
             user.LockoutEnd = DateTimeOffset.Now .AddYears(1);
             return _context.SaveChangesAsync();
+        }
+
+        public IEnumerable<Post> GetUserPosts(string id)
+        {
+            return _context.Posts.Where(post => post.User.Id == id)
+                .Include(post => post.User)
+                .Include(post => post.Replies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum);
         }
 
         private int CalculateUserRating(Type type, int rating)
