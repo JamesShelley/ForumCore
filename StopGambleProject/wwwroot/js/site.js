@@ -52,3 +52,6 @@ $('.ui.accordion')
 $('.ui.modal')
     .modal()
     ;
+$('.ui.dropdown')
+    .dropdown()
+;

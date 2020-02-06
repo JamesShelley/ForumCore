@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Project.Data.Models;
 using Project.Data;
 using Project.Service;
+using ReflectionIT.Mvc.Paging;
 
 namespace StopGambleProjects
 {
@@ -47,6 +48,7 @@ namespace StopGambleProjects
             services.AddScoped<IPost, PostService>();
             services.AddScoped<IUpload, UploadService>();
             services.AddScoped<IApplicationUser, ApplicationUserService>();
+            services.AddScoped<IAdmin, AdminService>();
             
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<DataSeeder>();

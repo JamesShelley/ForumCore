@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Project.Data;
 using Project.Data.Models;
@@ -10,23 +10,22 @@ namespace Project.Service
     public class AdminService : IAdmin
     {
         private readonly ApplicationDbContext _context;
-        private readonly ApplicationUserService _userService;
 
-        public AdminService(ApplicationDbContext context, ApplicationUserService userService)
+        public AdminService(ApplicationDbContext context)
         {
             _context = context;
-            _userService = userService;
         }
-        
+
         public async Task CreateModerator(string id)
         {
             var userStore = new UserStore<ApplicationUser>(_context);
-            var user = _userService.GetById(id);          
+            var user = _context.ApplicationUsers.Find(id);
             
-            userStore.AddToRoleAsync(user, "Moderator").Wait();
-            userStore.AddToRoleAsync(user, "moderator").Wait();
-            
+            userStore.AddToRoleAsync(user, "Moderator");
+            userStore.AddToRoleAsync(user, "moderator");
+
             await _context.SaveChangesAsync();
         }
+
     }
 }

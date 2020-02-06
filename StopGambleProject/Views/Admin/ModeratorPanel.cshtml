@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model StopGambleProject.Models.ApplicationUser.ProfileListModel
+<div class="ui container" style="padding-top:20px;">
+    <h1>Moderator panel</h1>
+    <p>
+        From here you can create moderators to help you manage content posted to your forum.
+    </p>
+    <div class="ui grid">
+        <div class="two column row">
+            <div class="eight wide column">
+                <h2>Create Moderator</h2>
+                <form method="post" class="ui form" asp-action="PromoteModerator">
+                    <div class="field">
+                        <select class="ui search selection dropdown" id="search-select">
+                            <option value="">Search user</option>
+                            @foreach (var profile in Model.Profiles)
+                            {
+                                @if (!profile.IsModerator)
+                                {
+                                    <option value="@profile.UserId" id="@profile.UserId"><i class="icon tick"></i>@profile.UserName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <button type="submit" class="ui green button">Add Moderator</button>
+                </form>
+            </div>
+            <div class="eight wide column">
+                <h2>Current Moderators</h2>
+                @if (User.IsInRole("Admin"))
+                {
+                    <ol>
+                        @foreach (var profile in Model.Profiles)
+                        {
+                            @if (profile.IsModerator)
+                            {
+                                <li><a href="/profile/detail/@profile.UserId" target="_blank"> @profile.UserName</a></li> 
+                            }
+                        }
+                    </ol>
+                }
+            </div>
+        </div>
+        <div class="one column row">
+            <div class="eight wide column">
+                <h2>Remove Moderator</h2>
+                    <form method="post" class="ui form" asp-action="PromoteModerator">
+                        <div class="field">
+                            <select class="ui search selection dropdown" id="search-select">
+                                <option value="">Search user</option>
+                                @foreach (var profile in Model.Profiles)
+                                {
+                                    @if (profile.IsModerator)
+                                    {
+                                        <option value="@profile.UserId" id="@profile.UserId"><i class="icon tick"></i>@profile.UserName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <button type="submit" class="ui red button">Delete Moderator</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>

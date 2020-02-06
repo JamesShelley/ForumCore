@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.Net.Http.Headers;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Project.Web;
+using ReflectionIT.Mvc.Paging;
 
 namespace StopGambleProject.Controllers
 {
@@ -51,7 +53,7 @@ namespace StopGambleProject.Controllers
             return View(model);
         }
 
-        public IActionResult Topic(int id, string searchQuery)
+        public  IActionResult Topic(int id, string searchQuery)
         {
             var forum = _forumService.GetById(id);
             var posts = _postService.GetFilteredPosts(forum, searchQuery).ToList();
@@ -70,10 +72,9 @@ namespace StopGambleProject.Controllers
             
             var model = new ForumTopicModel
             {
-                Posts = postListings,
+                Posts = postListings, 
                 Forum = BuildForumListing(forum)
             };
-
             return View(model);
         }
 

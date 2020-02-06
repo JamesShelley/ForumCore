@@ -79,6 +79,7 @@ namespace StopGambleProject.Controllers
                     ProfileImageUrl = user.ProfileImageUrl,
                     MemberSince = user.MemberSince,
                     IsAdmin = userRoles.Contains("Admin"),
+                    IsModerator = userRoles.Contains("Moderator"),
                     PostCount = postCount
                     
                 };
