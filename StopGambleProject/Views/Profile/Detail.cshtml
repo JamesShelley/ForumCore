@@ -3,42 +3,66 @@
 @model StopGambleProject.Models.ApplicationUser.ProfileModel
 
 @inject UserManager<ApplicationUser> UserManager
-
+<br>
 <div class="ui main text container" style="padding-top:25px;">
-<div class="ui grid">
-    <div class="two column row">
-       @* User Profile start *@
-        <div class="sixteen wide column">
-            <h1 class="ui header">
-                User Profile Page - @Model.UserName
-                @if (User.IsInRole("Admin") && @Model.IsAdmin == false)
-                {
-                    <a href="" class="ui red button">Deactivate User</a>
-                }
-            </h1>
-            <img class="wireframe" src="@Model.ProfileImageUrl">
-
-            @if (User.Identity.Name == Model.UserName)
-            {
-                <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
-                    <label class="ui blue button">
-                        Browse <input type="file" name="file" style="display: none"/>
-                    </label>
-                    <button type="submit" class="ui red button">Upload</button>
-                </form>
-            }
-            <br>
-            @if (Model.IsAdmin)
-            {
-                <p>Role: <span style="color:red">Admin</span></p>
-            }
-            <p>Post Count: @Model.PostCount</p>
-            <p>Rating: @Model.UserRating</p>
-            <p>Email: @Model.Email</p>
-            <p>Registered: @Model.MemberSince.ToString()</p>
-        </div>
-            @* User Profile end *@
-    </div>
+    <div class="ui grid">
+          <h1>                    User Profile Page - @Model.UserName </h1>
+        <div class="two column row">
+            <div class="eight wide column">
+                <div class="ui cards">
+                    <div class="card">
+                        <div class="blurring dimmable image">
+                            <div class="ui dimmer">
+                                <div class="content">
+                                    <div class="center">
+                                        <div class="ui inverted button">Add Friend</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <img src="@Model.ProfileImageUrl"/>
+                             @if (User.Identity.Name == Model.UserName)
+                                {
+                                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" class="center aligned">
+                                        <label class="ui blue button">
+                                            Browse <input type="file" name="file" style="display: none"/>
+                                        </label>
+                                        <button type="submit" class="ui green button">Upload</button>
+                                    </form>
+                                }
+                        </div>
+                        <div class="content">
+                            <a class="header">@Model.UserName</a>
+                            <div class="meta">
+                                @if (@Model.IsAdmin)
+                                {
+                                    <p class="date">Role: Admin</p>
+                                } else if (@Model.IsModerator && !Model.IsAdmin)
+                                {
+                                    <p class="date">Role: Moderator</p>
+                                }
+                                else
+                                {
+                                    <p class="date">Role: User</p>
+                                }
+                                <p class="date">Post count: @Model.PostCount</p>
+                                <p class="date">Rating: @Model.UserRating</p>
+                                <p class="date">Email: @Model.Email</p>
+                            </div>
+                        </div>
+                        <div class="extra content">
+                            <a>
+                                <i class="calendar icon"></i>
+                                <span class="date">Joined: @Model.MemberSince</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="eight wide column">
+                      <h1>  Profile Feed </h1>
+                </div>
+            
+            </div>
     </div>
 </div>
-<br/>
+<br>

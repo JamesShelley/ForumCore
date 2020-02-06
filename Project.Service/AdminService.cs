@@ -27,5 +27,15 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
+        public async Task RemoveModerator(string id)
+        {
+            var userStore = new UserStore<ApplicationUser>(_context);
+            var user = _context.ApplicationUsers.Find(id);
+
+            userStore.RemoveFromRoleAsync(user, "Moderator");
+            userStore.AddToRoleAsync(user, "moderator");
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
