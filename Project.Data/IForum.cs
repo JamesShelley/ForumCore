@@ -12,8 +12,6 @@ namespace Project.Data
         bool HasRecentPost(int id);
         Task Create(Forum forum);
         Task Delete(int forumId);
-        Task UpdateForumTitle(int forumId, string newTitle);
-        Task UpdateForumDescription(int forumId, string newDescription);
-
+        Task EditForum(int forumId, string newTitle, string newDescription);
     }
 }

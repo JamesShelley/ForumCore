@@ -70,14 +70,13 @@ namespace Project.Service
             return forum;
         }
 
-        public Task UpdateForumDescription(int forumId, string newDescription)
+        public async Task EditForum(int forumId, string newTitle, string newDescription)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateForumTitle(int forumId, string newTitle)
-        {
-            throw new NotImplementedException();
+            var forum = GetById(forumId);
+            forum.Title = newTitle;
+            forum.Description = newDescription;
+            _context.Forums.Update(forum);
+            await _context.SaveChangesAsync();
         }
     }
 }

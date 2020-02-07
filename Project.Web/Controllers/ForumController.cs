@@ -89,7 +89,13 @@ namespace StopGambleProject.Controllers
                 return Redirect("/");
             }
         }
-
+        
+        public async Task<IActionResult> Edit(ForumTopicModel model)
+        {
+            await _forumService.EditForum(model.Forum.Id,model.Forum.Name, model.Forum.Description);
+            return RedirectToAction("Topic","Forum", new { id = model.Forum.Id });
+        }
+        
         public IActionResult DeleteForum(Forum forum)
         {
             _forumService.Delete(forum.Id).Wait();

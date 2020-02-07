@@ -23,6 +23,14 @@ $(document).ready(function () {
     $(".deletePost").modal({
         closable: true
     });
+
+    $("#editForumButton").click(function(){
+        $(".editForum").modal('show');
+    });
+    $(".editForum").modal({
+        closable: true
+    });
+    
     $("#editPostButton").click(function () {
         $(".editPost").modal('show');
     });
