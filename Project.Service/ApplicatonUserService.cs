@@ -36,6 +36,14 @@ namespace Project.Service
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
+        
+        public async Task DeleteProfileImage(string id)
+        {
+            var user = GetById(id);
+            user.ProfileImageUrl = "";
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+        }
 
         public Task UpdateUserRating(string id, Type type)
         {

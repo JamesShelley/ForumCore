@@ -1,32 +1,13 @@
 ﻿@model StopGambleProject.Models.Reply.PostReplyModel
 
 <div style="padding-top:25px;">
-    <div class="ui raised very padded text container post segment" style="padding-top:10px;">
-        <div class="ui equal width grid">
-            <div class="two column row">
-                <div class="two wide column">
-                    <a href="/Profile/Detail/@Model.PostAuthorId">
-                        <img class="ui small image" src="@Model.PostAuthorImageUrl" style="width:50px;height:50px;border: 1px solid black;">
-                    </a>
-                </div>
-                <div class="ten wide column" style="padding-top: 15px">
-                    <h3>
-                        @Model.PostTitle
-                    </h3>
-                </div>
-            </div>
-            <div class="one column row">
-                <div class="twelve wide column">
-                    <p> @Model.PostContent</p>
-                </div>
-            </div>
-            <div class="one column row">
-                <div class="eleven wide column">
-                    <p> <a href="/Profile/Detail/@Model.PostAuthorId">@Model.PostAuthorName</a> (@Model.PostAuthorRating) - @Model.PostCreated</p>
-                </div>
-            </div>
-        </div>
-    </div>
+   <div class="ui raised very padded text container post segment">
+     <h2 class="ui left floated header"><img src="@Model.AuthorImageUrl">@Model.PostTitle</h2>
+     <div class="ui clearing divider"></div>
+       <p>@Model.PostContent</p>
+      
+       <p>  <a href="/Profile/Detail/@Model.PostAuthorId">@Model.PostAuthorName</a> (@Model.PostAuthorRating) - @Model.PostCreated</p>
+   </div>
 </div>
 
 <div class="ui center aligned text container">

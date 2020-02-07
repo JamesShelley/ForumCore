@@ -6,7 +6,7 @@
 <br>
 <div class="ui main text container" style="padding-top:25px;">
     <div class="ui grid">
-          <h1>                    User Profile Page - @Model.UserName </h1>
+        <h1>User Profile Page - @Model.UserName </h1>
         <div class="two column row">
             <div class="six wide column">
                 <div class="ui cards">
@@ -22,13 +22,18 @@
                             <img src="@Model.ProfileImageUrl"/>
                              @if (User.Identity.Name == Model.UserName)
                                 {
-                                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" class="center aligned">
-                                        <a type="submit" class="ui red button">Remove</a>
+                                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" class="center aligned" style="padding-top: 5px;padding-bottom: 5px;">
                                         <label class="ui blue button">
                                             Browse <input type="file" name="file" style="display: none"/>
                                         </label>
                                         <button type="submit" class="ui green button">Upload</button>
                                     </form>
+                                    @if (!Model.ProfileImageUrl.Equals(""))
+                                    {
+                                        <form method="post" class="center aligned" style="padding-top: 5px;padding-bottom: 5px;">
+                                            <a href="/Profile/DeleteProfileImage/@Model.UserId" class="ui red button">Remove</a>
+                                        </form>
+                                    }
                                 }
                         </div>
                         <div class="content">

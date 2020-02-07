@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Microsoft.WindowsAzure.Storage.Blob;
 using Project.Data;
 using Project.Data.Models;
 using StopGambleProject.Models.ApplicationUser;
@@ -21,7 +22,8 @@ namespace StopGambleProject.Controllers
         private readonly IUpload _uploadService;
         private readonly IConfiguration _configuration;
         private readonly IPost _postService;
-        
+        private CloudBlobContainer blobContainer;
+
         public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration, IPost postService)
         {
             _userManager = userManager;
@@ -115,7 +117,7 @@ namespace StopGambleProject.Controllers
 
             return RedirectToAction("Detail", "Profile");
         }
-
+        
         [HttpPost]
         public async Task<IActionResult> UploadProfileImage(IFormFile file)
         {
@@ -146,5 +148,14 @@ namespace StopGambleProject.Controllers
             return RedirectToAction("Detail", "Profile", new { id = userId });
             
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteProfileImage(string userId)
+        {
+            await _userService.DeleteProfileImage(userId);
+
+            return RedirectToAction("Detail", "Profile", new {id = userId});
+        }
+
     }
 }

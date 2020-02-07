@@ -17,121 +17,75 @@
 </div>
 
 <div style="padding-top:25px;">
-    <div class="ui raised very padded text container post segment" style="padding-top:10px;">
-        <div class="ui equal width grid">
-            <div class="two column row">
+<div class="ui raised very padded text container post segment">
+  <h2 class="ui left floated header"><img src="@Model.AuthorImageUrl">@Model.Title</h2>
+  <div class="ui clearing divider"></div>
+    <p>@Model.Content</p>
+   
+    <p>   @if (Model.IsAdmin)
+          {
+              <i class="chess queen icon" style="color:gold"></i>
+          }
+        @if (Model.IsModerator)
+        {
+            <i class="chess queen icon" style="color:blue"></i>
+        }<a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created</p>
+    <div class="ui fitted divider"></div>
+                <br>
+    <div class="ui grid">
+        <div class="three column row">
+            @if (User.Identity.IsAuthenticated)
+            {
                 <div class="two wide column">
-                    <a href="/Profile/Detail/@Model.AuthorId">
-                        <img class="ui small image" src="@Model.AuthorImageUrl" style="width:50px;height:50px;">
-                    </a>
+                    <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
                 </div>
-                <div class="ten wide column" style="padding-top: 15px">
-                    <h3>
-                        @Model.Title
-                    </h3>
+            }
+            @if (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                <div class="two wide column">
+                    <button class="ui blue button editButton" type="button" id="editPostButton">Edit</button>
                 </div>
-            </div>
-            <div class="one column row">
-                <div class="twelve wide column">
-                    <p> @Model.Content</p>
+            }
+            @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+            {
+                <div class="two wide column">
+                    <button class="ui button red deleteButton" type="button" id="deletePostButton">Delete</button>
                 </div>
-            </div>
-            <div class="one column row">
-                <div class="ten wide column">
-                    <p>
-                        @if (Model.IsAdmin)
-                        {
-                            <i class="chess queen icon" style="color:gold"></i>
-                        } 
-                         @if (Model.IsModerator)
-                        {
-                            <i class="chess queen icon" style="color:blue"></i>
-                        } 
-                        <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created
-                        
-                    </p>
-                </div>
-            </div>
-            <div class="ui fitted divider"></div>
-
-            <div class="three column row">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <div class="two wide column">
-
-                        <a href="/Reply/Create/@Model.Id" class="ui green button">Reply</a>
-                    </div>
-                }
-                @if (User.Identity.Name == Model.AuthorName || User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                {
-                    <div class="two wide column">
-                        <button class="ui blue button editButton" type="button" id="editPostButton">Edit</button>
-                    </div>
-                }
-                @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                {
-                    <div class="two wide column">
-                        <button class="ui button red deleteButton" type="button" id="deletePostButton">Delete</button>
-                    </div>
-                }
-            </div>
+            }
         </div>
-    </div>
+                </div>
+</div>
 </div>
 @if (Model.Replies.Any())
 {
     foreach (var reply in Model.Replies)
     {
-        <div style="padding-top:25px; padding-bottom:25px;">
-            <div class="ui raised very padded text container post segment" style="padding-top:10px;">
-                <div class="ui equal width grid">
-                    <div class="two column row">
-                        <div class="two wide column">
-                            <a href="/Profile/Detail/@reply.AuthorId">
-                                <img class="ui small image" src="@reply.AuthorImageUrl" style="width:50px;height:50px;">
-                            </a>
-                        </div>
-                        <div class="ten wide column" style="padding-top: 15px">
-                            <h3>
-                                <span style="font-size:14px;">
-                                    @if (@reply.IsAdmin)
-                                    {
-                                        <i class="chess queen icon" style="color:gold"></i>
-                                    }
-                                     @if (Model.IsModerator)
-                                    {
-                                        <i class="chess queen icon" style="color:blue"></i>
-                                    } 
-                                    <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
-                                </span>
-                            </h3>
-                        </div>
-                    </div>
-                    <div class="one column row">
-                        <div class="sixteen wide column">
-                            <p> @reply.ReplyContent</p>
-                        </div>
-                    </div>
-                    <div class="one column row">
-                        <div class="sixteen wide column">
-                            <p> @reply.Created</p>
-                        </div>
-                    </div>
-                    <div class="ui fitted divider"></div>
+        <div class="ui raised very padded text container post segment">
+            <h3 class="ui left floated header"><img src="@reply.AuthorImageUrl">
+                <span> @if (@reply.IsAdmin)
+              {
+                  <i class="chess queen icon" style="color:gold; margin-right: 0"></i>
+              }
+              @if (Model.IsModerator)
+              {
+                  <i class="chess queen icon" style="color:blue; margin-right: 0"></i>
+              }</span> <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)</h3>
+            <div class="ui clearing divider"></div>
+            <p>@reply.ReplyContent</p>
 
-                    <div class="one column row">
-                        @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
-                        {
-                            <div class="one wide column">
-                                <button class="ui button red deleteButton" type="button" id="deleteReplyButton">Delete</button>
-                            </div>
-                        }
-                    </div>
+            <div class="ui fitted divider"></div>
+            <br>
+            <div class="ui grid">
+                <div class="three column row">
+                   @if (User.IsInRole("Admin") || User.IsInRole("Moderator"))
+                   {
+                       <div class="one wide column">
+                           <button class="ui button red deleteButton" type="button" id="deleteReplyButton">Delete</button>
+                       </div>
+                   }
                 </div>
             </div>
         </div>
-
-
     }
 }
 else

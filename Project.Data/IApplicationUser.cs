@@ -13,6 +13,8 @@ namespace Project.Data
         IEnumerable<Post> GetUserPosts(string id, int postCount);
 
         Task SetProfileImage(string id, Uri uri);
+
+        Task DeleteProfileImage(string id);
         Task UpdateUserRating(string id, Type type);
 
         Task DeactivateUser(string id);
