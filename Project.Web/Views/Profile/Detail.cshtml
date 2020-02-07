@@ -66,34 +66,46 @@
             </div>
             <div class="ten wide column">
                 <h1> Latest Posts</h1>
-                 <table class="ui celled table" id="forumIndexTable">
-                 <tbody>
-                 @foreach (var post in Model.UserPosts)
-                 {
-                     <tr>
-                         <td>
-                             <div class="ui grid">
-                                 <div class="twelve wide column">
+                <table class="ui celled table" id="forumIndexTable">
+                    <tbody>
+                    @foreach (var post in Model.UserPosts)
+                    {
+                        <tr>
+                            <td>
+                                <div class="ui grid">
+                                    <div class="twelve wide column">
 
-                                     <a href="/Post/Index/@post.Id">@post.Title</a>
-                                     <div class="postSubTitle">
-                                         @if (post.RepliesCount == 0)
-                                         {
-                                             <span>No Replies </span>
-                                         }
-                                         else
-                                         {
-                                             <span>Replies: @post.RepliesCount </span>
-                                         }
-                                          <span>, Date Posted: @post.DatePosted</span>
-                                     </div>
-                                 </div>
-                             </div>
-                         </td>
-                     </tr>
-                 }
-                 </tbody>
-                 </table>
+                                        <a href="/Post/Index/@post.Id">@post.Title</a>
+                                        <div class="postSubTitle">
+                                            @if (post.RepliesCount == 0)
+                                            {
+                                                <span>No Replies </span>
+                                            }
+                                            else
+                                            {
+                                                <span>Replies: @post.RepliesCount </span>
+                                            }
+                                            <span>, Date Posted: @post.DatePosted</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                @if (User.IsInRole("Admin") && !Model.IsModerator)
+                {
+                    <form type="post" asp-controller="Admin" asp-action="PromoteModerator" asp-route-userId="@Model.UserId">
+                        <button type="submit" class="ui large blue button">Make Moderator</button>
+                    </form>
+                }
+                @if (User.IsInRole("Admin") && Model.IsModerator)
+                {
+                    <form type="post" asp-controller="Admin" asp-action="RemoveModerator" asp-route-userId="@Model.UserId">
+                        <button type="submit" class="ui large red button">Remove Moderator</button>
+                        </form>
+                }
             </div>
             
             </div>

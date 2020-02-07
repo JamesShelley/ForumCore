@@ -40,7 +40,13 @@ namespace StopGambleProject.Controllers
         public async Task<IActionResult> PromoteModerator(string userId)
         {
             await _adminService.CreateModerator(userId);
-            return RedirectToAction("ModeratorPanel", "Admin");
+            return RedirectToAction("Detail", "Profile", new {id = userId});
+        }
+        [HttpPost]
+        public async Task<IActionResult> RemoveModerator(string userId)
+        {
+            await _adminService.RemoveModerator(userId);
+            return RedirectToAction("Detail", "Profile", new {id = userId});
         }
         private bool IsUserModerator(ApplicationUser user)
         {

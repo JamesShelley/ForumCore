@@ -1,6 +1,7 @@
 ﻿@using System.Linq
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 @using StopGambleProject.Models.ApplicationUser
+@using StopGambleProject.Models.Admin
 @model StopGambleProject.Models.ApplicationUser.ProfileListModel
 
 <div class="ui container" style="padding-top:20px;">
@@ -13,7 +14,7 @@
         <div class="two column row">
             <div class="eight wide column">
                 <h2>Create Moderator</h2>
-                <form method="post" class="ui form" asp-action="PromoteModerator">
+                <form method="post" class="ui form" asp-action="PromoteModerator" asp-route-userId="">
                     <div class="field">
                         <p></p>
                         <select class="ui search selection dropdown" id="search-select">

@@ -33,7 +33,7 @@ namespace Project.Service
             var user = _context.ApplicationUsers.Find(id);
 
             userStore.RemoveFromRoleAsync(user, "Moderator");
-            userStore.AddToRoleAsync(user, "moderator");
+            userStore.RemoveFromRoleAsync(user, "moderator");
 
             await _context.SaveChangesAsync();
         }

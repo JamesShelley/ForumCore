@@ -1,4 +1,7 @@
-﻿namespace StopGambleProject.Models.Admin
+﻿using System.Collections.Generic;
+using StopGambleProject.Models.ApplicationUser;
+
+namespace StopGambleProject.Models.Admin
 {
     public class AddModeratorModel
     {
