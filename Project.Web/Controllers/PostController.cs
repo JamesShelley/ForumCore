@@ -45,7 +45,8 @@ namespace StopGambleProject.Controllers
                 Replies = replies,
                 ForumId = post.Forum.Id,
                 ForumName = post.Forum.Title,
-                IsAdmin = IsAuthorAdmin(post.User)
+                IsAdmin = IsAuthorAdmin(post.User),
+                IsModerator = IsAuthorModerator(post.User)
             };
 
             return View(model);
@@ -121,6 +122,11 @@ namespace StopGambleProject.Controllers
         private bool IsAuthorAdmin(ApplicationUser user)
         {
             return _userManager.GetRolesAsync(user).Result.Contains("Admin");
+        }
+        
+        private bool IsAuthorModerator(ApplicationUser user)
+        {
+            return _userManager.GetRolesAsync(user).Result.Contains("Moderator");
         }
 
         private IEnumerable<PostReplyModel> BuildPostReplies(IEnumerable<PostReply> replies)

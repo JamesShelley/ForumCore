@@ -42,7 +42,13 @@
                         @if (Model.IsAdmin)
                         {
                             <i class="chess queen icon" style="color:gold"></i>
-                        } <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created
+                        } 
+                         @if (Model.IsModerator)
+                        {
+                            <i class="chess queen icon" style="color:blue"></i>
+                        } 
+                        <a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created
+                        
                     </p>
                 </div>
             </div>
@@ -92,6 +98,10 @@
                                     {
                                         <i class="chess queen icon" style="color:gold"></i>
                                     }
+                                     @if (Model.IsModerator)
+                                    {
+                                        <i class="chess queen icon" style="color:blue"></i>
+                                    } 
                                     <a href="/Profile/Detail/@reply.AuthorId">@reply.AuthorName</a> (@reply.AuthorRating)
                                 </span>
                             </h3>
