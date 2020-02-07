@@ -68,7 +68,7 @@ namespace StopGambleProject.Controllers
                 DatePosted = post.Created.ToString(),
                 RepliesCount = post.Replies.Count(),
                 Forum = BuildForumListing(post)
-            });
+            }).OrderByDescending(post => post.DatePosted);
             
             var model = new ForumTopicModel
             {
