@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,7 @@ namespace StopGambleProject.Controllers
             _postService = postService;
         }
 
+        [Route("/Users/")]
         public IActionResult Index()
         {
             if(User.Identity.IsAuthenticated)
@@ -99,24 +101,13 @@ namespace StopGambleProject.Controllers
                     UserPosts = posts
                     
                 };
-
+                
                 return View(model);
             } else
             {
                 return Redirect("/Identity/Account/Register");
             }
         }
-        
-        private PostListingModel GetUserPostsListing(string id)
-        {
-            var userPosts = _userService.GetUserPosts(id);
-
-            return new PostListingModel
-            {
-                Title = "cool",
-            };
-        }
-
         public IActionResult LockoutUser(string id)
         {
             id = _userManager.GetUserId(User);

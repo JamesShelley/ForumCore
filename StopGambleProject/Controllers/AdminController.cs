@@ -36,6 +36,7 @@ namespace StopGambleProject.Controllers
             return View();
         }
 
+        [HttpPost]
         public async Task<IActionResult> PromoteModerator(string userId)
         {
             await _adminService.CreateModerator(userId);
@@ -68,7 +69,7 @@ namespace StopGambleProject.Controllers
             
             var model = new ProfileListModel
             {
-                Profiles = profiles
+                Profiles = profiles,
             };
 
             return View(model);

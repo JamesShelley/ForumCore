@@ -1,9 +1,13 @@
-﻿@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+﻿@using System.Linq
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using StopGambleProject.Models.ApplicationUser
 @model StopGambleProject.Models.ApplicationUser.ProfileListModel
+
 <div class="ui container" style="padding-top:20px;">
     <h1>Moderator panel</h1>
     <p>
-        From here you can create moderators to help you manage content posted to your forum.
+        From here you can create moderators to help you manage content posted to your forum. Moderators have the ability to edit a users posts, delete a users post and lock a thread meaning
+        that no one else can post to it. 
     </p>
     <div class="ui grid">
         <div class="two column row">
@@ -11,13 +15,14 @@
                 <h2>Create Moderator</h2>
                 <form method="post" class="ui form" asp-action="PromoteModerator">
                     <div class="field">
+                        <p></p>
                         <select class="ui search selection dropdown" id="search-select">
                             <option value="">Search user</option>
                             @foreach (var profile in Model.Profiles)
                             {
                                 @if (!profile.IsModerator)
                                 {
-                                    <option value="@profile.UserId" id="@profile.UserId"><i class="icon tick"></i>@profile.UserName</option>
+                                    <option value="@profile.UserId" id="optionForm">@profile.UserName</option>
                                 }
                             }
                         </select>

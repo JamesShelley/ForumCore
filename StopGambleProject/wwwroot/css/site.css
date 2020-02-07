@@ -1,12 +1,14 @@
 ﻿body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: grayscale;
+    font-family: 'Roboto', sans-serif;
 }
 
 .Site {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    font-family: 'Roboto', sans-serif;
 }
 
 .Site-content {
@@ -18,7 +20,6 @@
 }
 
 p.lead {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 1.3em;
     color: #333333;
     line-height: 1.4;

@@ -8,7 +8,7 @@
     <div class="ui grid">
           <h1>                    User Profile Page - @Model.UserName </h1>
         <div class="two column row">
-            <div class="eight wide column">
+            <div class="six wide column">
                 <div class="ui cards">
                     <div class="card">
                         <div class="blurring dimmable image">
@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="eight wide column">
+            <div class="ten wide column">
                 <h1> Latest Posts</h1>
                  <table class="ui celled table" id="forumIndexTable">
                  <tbody>
@@ -80,6 +80,7 @@
                                          {
                                              <span>Replies: @post.RepliesCount </span>
                                          }
+                                          <span>, Date Posted: @post.DatePosted</span>
                                      </div>
                                  </div>
                              </div>
