@@ -21,8 +21,8 @@ namespace Project.Service
             var userStore = new UserStore<ApplicationUser>(_context);
             var user = _context.ApplicationUsers.Find(id);
             
-            userStore.AddToRoleAsync(user, "Moderator");
-            userStore.AddToRoleAsync(user, "moderator");
+            userStore.AddToRoleAsync(user, "Moderator").Wait();
+         //   userStore.AddToRoleAsync(user, "moderator").Wait();
 
             await _context.SaveChangesAsync();
         }
@@ -32,8 +32,8 @@ namespace Project.Service
             var userStore = new UserStore<ApplicationUser>(_context);
             var user = _context.ApplicationUsers.Find(id);
 
-            userStore.RemoveFromRoleAsync(user, "Moderator");
-            userStore.RemoveFromRoleAsync(user, "moderator");
+            userStore.RemoveFromRoleAsync(user, "Moderator").Wait();
+           // userStore.RemoveFromRoleAsync(user, "moderator").Wait();
 
             await _context.SaveChangesAsync();
         }
