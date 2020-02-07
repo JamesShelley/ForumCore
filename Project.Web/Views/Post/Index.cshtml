@@ -26,7 +26,7 @@
           {
               <i class="chess queen icon" style="color:gold"></i>
           }
-        @if (Model.IsModerator)
+        @if (Model.IsModerator && !Model.IsAdmin)
         {
             <i class="chess queen icon" style="color:blue"></i>
         }<a href="/Profile/Detail/@Model.AuthorId">@Model.AuthorName</a> (@Model.AuthorRating) - @Model.Created</p>
