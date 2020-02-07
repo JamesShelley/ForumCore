@@ -80,7 +80,7 @@ namespace StopGambleProject.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, MemberSince = DateTime.Now};
+                var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email, MemberSince = DateTime.Now, ProfileImageUrl = "/images/users/default.png"};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
