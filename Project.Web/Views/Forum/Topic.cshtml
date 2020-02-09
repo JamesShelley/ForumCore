@@ -149,13 +149,27 @@
             <div class="ui header">@Model.Forum.Name - @Model.Forum.Description</div>
             @if (Model.Posts.Any())
             {
-                <p>This will also delete the following posts:</p>
+        <div class="ui icon red message">
+            <i class="notched circle loading icon"></i>
+            <div class="content">
+                <div class="header">
+                    Warning
+                </div>
+                <p>
+                    This will also delete the following posts and any replies to the post:
+
+                </p>
+            </div>
+        </div>
+
                 <ol>
                     @foreach (var post in Model.Posts)
                     {
                         <li><a href="/Post/Index/@post.Id" target="_blank">@post.Title</a> by <a href="/Profile/Detail/@post.AuthorId">@post.AuthorName</a></li>
                     }
                 </ol>
+
+                <p></p>
             }
         </div>
     </div>
