@@ -10,6 +10,7 @@ namespace Project.Data
     {
         Post GetById(int id);
         int GetUserPostCount(string id);
+        int GetPostReplyCount(int id);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetFilteredPosts(Forum forum, string searchQuery);
         IEnumerable<Post> GetFilteredPosts(string searchQuery);

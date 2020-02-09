@@ -19,7 +19,7 @@ namespace StopGambleProject.Models.Post
         
         public bool IsAdmin { get; set; }
         public bool IsModerator { get; set; }
-
+        public int PostReplyCount { get; set; }
         public IEnumerable<PostReplyModel> Replies { get; set; }
 
     }

@@ -146,6 +146,32 @@ else
         <div class="description">
             <div class="ui header">@Model.Title</div>
             <p>@Model.Content</p>
+
+            @if (Model.PostReplyCount > 1)
+            {
+                <div class="ui icon red message">
+                    <i class="notched circle loading icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            Warning
+                        </div>
+                        <p>This will also delete the @Model.PostReplyCount replies associated with this post.</p>
+                    </div>
+                </div>
+            }
+            else if(Model.PostReplyCount == 1)
+            {
+                <div class="ui icon red message">
+                    <i class="notched circle loading icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            Warning
+                        </div>
+                        <p>This will also delete the 1 reply associated with this post.</p>
+                    </div>
+                </div>
+            }
+
         </div>
     </div>
     <div class="actions">

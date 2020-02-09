@@ -32,10 +32,19 @@ namespace Project.Service
         public async Task Delete(int id)
         {
             var post = GetById(id);
+            var repliesToPost = _context.PostReplies.Where(postReply => postReply.Post.Id == id);
+
+            /*
+            * Delete Replies
+            */
+            foreach (var postReply in repliesToPost)
+            {
+                _context.PostReplies.Remove(postReply);
+            }
+
             _context.Remove(post);
             await _context.SaveChangesAsync();
         }
-
         
         public async Task DeletePostsInForum(int forumId)
         {
@@ -85,6 +94,11 @@ namespace Project.Service
                  .Include(post => post.Replies).ThenInclude(reply => reply.User)
                  .Include(post => post.Forum)
                  .First();
+        }
+
+        public int GetPostReplyCount(int id)
+        {
+            return _context.PostReplies.Where(postReply => postReply.Post.Id == id).Count();
         }
 
         public int GetUserPostCount(string id)

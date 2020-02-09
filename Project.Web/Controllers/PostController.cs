@@ -46,7 +46,9 @@ namespace StopGambleProject.Controllers
                 ForumId = post.Forum.Id,
                 ForumName = post.Forum.Title,
                 IsAdmin = IsAuthorAdmin(post.User),
-                IsModerator = IsAuthorModerator(post.User)
+                IsModerator = IsAuthorModerator(post.User),
+                PostReplyCount = _postService.GetPostReplyCount(post.Id)
+
             };
 
             return View(model);
@@ -114,10 +116,8 @@ namespace StopGambleProject.Controllers
         
         public IActionResult DeletePost(Post post)
         {
-            var forumId = post.Forum.Id;
             _postService.Delete(post.Id).Wait();
-            //return Redirect("/Forum");
-            return RedirectToAction("Topic", "Forum", new {id = forumId});
+            return Redirect("/Forum");
         }
         
         private bool IsAuthorAdmin(ApplicationUser user)
