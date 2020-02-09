@@ -96,9 +96,10 @@ namespace StopGambleProject.Controllers
             return RedirectToAction("Topic","Forum", new { id = model.Forum.Id });
         }
         
-        public IActionResult DeleteForum(Forum forum)
+        public async Task<IActionResult> DeleteForum(Forum forum)
         {
-            _forumService.Delete(forum.Id).Wait();
+            await _postService.DeletePostsInForum(forum.Id);
+            await _forumService.Delete(forum.Id);
             return RedirectToAction("Index", "Forum");
         }
 

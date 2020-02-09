@@ -341,3 +341,6 @@ healthchecksdb
 /StopGambleProject/wwwroot/images/users/
 /StopGambleProject/wwwroot/images/forum/
 /StopGambleProject/storageSettings.json
+/StopGambleProject/.idea
+/StopGambleProject/.vs/ForumCore
+/StopGambleProject/.vscode

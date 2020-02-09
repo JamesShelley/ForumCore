@@ -40,11 +40,12 @@ else
                     </td>
                     <td class="collapsing" style="border-left: none">
                         <a asp-contoller="Forum" asp-action="Topic" asp-route-id="@forum.Id">@forum.Name
-                            @if (forum.HasRecentPost)
-                            {
-                                <i class="fire icon" style="color:red"></i>
-                            }
+                            
                         </a>
+                        @if (forum.HasRecentPost)
+                        {
+                        <i class="fire icon" style="color:red"></i>
+                        }
                     </td>
                     <td>
                         @forum.Description

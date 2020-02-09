@@ -21,19 +21,19 @@
                             </div>
                             <img src="@Model.ProfileImageUrl"/>
                              @if (User.Identity.Name == Model.UserName)
+                                {@if (!Model.ProfileImageUrl.Equals(""))
                                 {
+                                    <form method="post" class="center aligned" style="padding-top: 5px;padding-bottom: 5px;">
+                                        <a href="/Profile/DeleteProfileImage/@Model.UserId" class="ui red button">Remove</a>
+                                    </form>
+                                }
                                     <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage" class="center aligned" style="padding-top: 5px;padding-bottom: 5px;">
                                         <label class="ui blue button">
                                             Browse <input type="file" name="file" style="display: none"/>
                                         </label>
                                         <button type="submit" class="ui green button">Upload</button>
                                     </form>
-                                    @if (!Model.ProfileImageUrl.Equals(""))
-                                    {
-                                        <form method="post" class="center aligned" style="padding-top: 5px;padding-bottom: 5px;">
-                                            <a href="/Profile/DeleteProfileImage/@Model.UserId" class="ui red button">Remove</a>
-                                        </form>
-                                    }
+                                    
                                 }
                         </div>
                         <div class="content">

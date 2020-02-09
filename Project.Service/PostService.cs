@@ -36,6 +36,32 @@ namespace Project.Service
             await _context.SaveChangesAsync();
         }
 
+        
+        public async Task DeletePostsInForum(int forumId)
+        {
+            var forum = GetPostsByForum(forumId);
+            var postsInForum = _context.Posts.Where(post => post.Forum.Id == forumId);
+            var repliesInForum = _context.PostReplies.Where(postReply => postReply.Post.Forum.Id == forumId);
+
+            /*
+             * Delete Replies
+             */
+            foreach (var postReply in repliesInForum)
+            {
+                _context.PostReplies.Remove(postReply);
+            }
+
+            /*
+            * Delete Posts
+            */
+            foreach (var post in postsInForum)
+            {
+                _context.Posts.Remove(post);
+            }
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task EditPostContent(int id, string newContent, string newTitle)
         {
             var post = GetById(id);
@@ -79,11 +105,6 @@ namespace Project.Service
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
         {
             return GetAll().Where(post => post.Title.Contains(searchQuery) || post.Content.Contains(searchQuery));
-        }
-        
-        public IEnumerable<Post> GetForumPostsToBeDeleted(int forumId)
-        {
-            return GetAll().Where(post => post.Forum.Id == forumId);
         }
 
         public IEnumerable<Post> GetLatestPosts(int numberOfPosts)

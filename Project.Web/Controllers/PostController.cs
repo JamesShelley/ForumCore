@@ -114,9 +114,10 @@ namespace StopGambleProject.Controllers
         
         public IActionResult DeletePost(Post post)
         {
+            var forumId = post.Forum.Id;
             _postService.Delete(post.Id).Wait();
-            return Redirect("/Forum");
-            //  return RedirectToAction("Topic", "Forum", post.Forum.Id);
+            //return Redirect("/Forum");
+            return RedirectToAction("Topic", "Forum", new {id = forumId});
         }
         
         private bool IsAuthorAdmin(ApplicationUser user)
