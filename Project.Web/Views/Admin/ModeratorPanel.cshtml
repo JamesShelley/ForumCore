@@ -10,64 +10,40 @@
         From here you can create moderators to help you manage content posted to your forum. Moderators have the ability to edit a users posts, delete a users post and lock a thread meaning
         that no one else can post to it. 
     </p>
-    <div class="ui grid">
-        <div class="two column row">
-            <div class="eight wide column">
-                <h2>Create Moderator</h2>
-                <form method="post" class="ui form" asp-action="PromoteModerator" asp-route-userId="">
-                    <div class="field">
-                        <p></p>
-                        <select class="ui search selection dropdown" id="search-select">
-                            <option value="">Search user</option>
-                            @foreach (var profile in Model.Profiles)
-                            {
-                                @if (!profile.IsModerator)
-                                {
-                                    <option value="@profile.UserId" id="optionForm">@profile.UserName</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                    <button type="submit" class="ui green button">Add Moderator</button>
-                </form>
-            </div>
-            <div class="eight wide column">
                 <h2>Current Moderators</h2>
-                @if (User.IsInRole("Admin"))
-                {
-                    <ol>
-                        @foreach (var profile in Model.Profiles)
-                        {
-                            @if (profile.IsModerator)
-                            {
-                                <li><a href="/profile/detail/@profile.UserId" target="_blank"> @profile.UserName</a></li> 
-                            }
-                        }
-                    </ol>
-                }
-            </div>
-        </div>
-        <div class="one column row">
-            <div class="eight wide column">
-                <h2>Remove Moderator</h2>
-                    <form method="post" class="ui form" asp-action="PromoteModerator">
-                        <div class="field">
-                            <select class="ui search selection dropdown" id="search-select">
-                                <option value="">Search user</option>
+                            <div class="ui cards">
                                 @foreach (var profile in Model.Profiles)
                                 {
                                     @if (profile.IsModerator)
                                     {
-                                        <option value="@profile.UserId" id="@profile.UserId"><i class="icon tick"></i>@profile.UserName</option>
+                                        <div class="card">
+                                            <div class="blurring dimmable image">
+                                                <div class="ui dimmer">
+                                                    <div class="content">
+                                                        <div class="center">
+                                                            <div class="ui inverted button">Add Friend</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <img src="@profile.ProfileImageUrl" />
+                                            </div>
+                                            <div class="content">
+                                                <a class="header">@profile.UserName</a>
+                                                <div class="meta">
+                                                    <p class="date">Post count: @profile.PostCount</p>
+                                                    <p class="date">Rating: @profile.UserRating</p>
+                                                    <p class="date">Email: @profile.Email</p>
+                                                </div>
+                                            </div>
+                                            <div class="extra content">
+                                                <a>
+                                                    <i class="calendar icon"></i>
+                                                    <span class="date">Joined: @profile.MemberSince</span>
+                                                </a>
+                                            </div>
+                                        </div>
                                     }
                                 }
-                            </select>
-                        </div>
-                        <button type="submit" class="ui red button">Delete Moderator</button>
-                    </form>
-            </div>
-        </div>
-    </div>
+                            </div>
 
-
-</div>
+ </div>

@@ -16,7 +16,7 @@
                     </h1>
                 </div>
                 <div class="two wide column">
-                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create post</a>
+                    <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id" class="ui green button">Create new post</a>
                 </div>
                 @if (User.IsInRole("Admin"))
                 {
