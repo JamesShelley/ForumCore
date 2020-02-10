@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Project.Data;
 using Project.Data.Models;
+using Project.Web;
+using ReflectionIT.Mvc.Paging;
 using StopGambleProject.Models.ApplicationUser;
 using StopGambleProject.Models.Forum;
 using StopGambleProject.Models.Post;
@@ -22,7 +24,6 @@ namespace StopGambleProject.Controllers
         private readonly IUpload _uploadService;
         private readonly IConfiguration _configuration;
         private readonly IPost _postService;
-        private CloudBlobContainer blobContainer;
 
         public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration, IPost postService)
         {
@@ -34,29 +35,34 @@ namespace StopGambleProject.Controllers
         }
 
         [Route("/Users/")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int? pageNumber)
         {
             if(User.Identity.IsAuthenticated)
             {
-                
                 var profiles = _userService.GetAll().OrderBy(user => user.MemberSince)
-             .Select(u => new ProfileModel
-             {
-                 Email = u.Email,
-                 UserId = u.Id,
-                 UserName = u.UserName,
-                 ProfileImageUrl = u.ProfileImageUrl,
-                 UserRating = u.Rating.ToString(),
-                 MemberSince = u.MemberSince,
-                 PostCount = _postService.GetUserPostCount(u.Id)
-             });
-
+                 .Select(u => new ProfileModel
+                 {
+                     Email = u.Email,
+                     UserId = u.Id,
+                     UserName = u.UserName,
+                     ProfileImageUrl = u.ProfileImageUrl,
+                     UserRating = u.Rating.ToString(),
+                     MemberSince = u.MemberSince,
+                     PostCount = _postService.GetUserPostCount(u.Id)
+                 });
+                
                 var model = new ProfileListModel
                 {
                     Profiles = profiles
                 };
+               // PagingList.CreateAsync<T>()
+            //    var paginationView1 = await PagingList<ProfileModel>.CreateAsync(testModel, 10, page);
+                //var paginationView2 = await PagingList.CreateAsync<ProfileModel>(testModel, 10, page);
+               // return View(model);
+               int pageSize = 3;
+               return View(model);
+               //return View(await PaginatedList<ProfileModel>.CreateAsync(model, pageNumber ?? 1, pageSize));
 
-                return View(model);
             } else
             {
                 return Redirect("/Identity/Account/Register");
@@ -103,7 +109,6 @@ namespace StopGambleProject.Controllers
                     UserPosts = posts
                     
                 };
-                
                 return View(model);
             } else
             {

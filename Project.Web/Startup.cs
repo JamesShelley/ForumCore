@@ -52,6 +52,7 @@ namespace StopGambleProjects
             
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddTransient<DataSeeder>();
+            services.AddPaging();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

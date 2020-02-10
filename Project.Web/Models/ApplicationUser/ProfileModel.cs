@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using StopGambleProject.Models.Post;
 
@@ -17,7 +18,7 @@ namespace StopGambleProject.Models.ApplicationUser
         public DateTime MemberSince { get; set; }
         public IFormFile ImageUpload { get; set; }
         public int PostCount { get; set; }
-        
+        public ProfileListModel ProfileList { get; set; }
         public IEnumerable<PostListingModel> UserPosts { get; set; }
     }
 }
