@@ -1,6 +1,8 @@
-﻿@model StopGambleProject.Models.ApplicationUser.ProfileListModel
-<div class="ui center aligned text container">
+﻿@* @model StopGambleProject.Models.ApplicationUser.ProfileListModel *@
+@model ReflectionIT.Mvc.Paging.PagingList<Project.Data.Models.ApplicationUser>
+@addTagHelper *, ReflectionIT.Mvc.Paging
 
+<div class="ui center aligned text container">
     <div class="ui grid">
         <div class="two column row">
             <div class="thirteen wide column">
@@ -15,24 +17,27 @@
 <div class="ui center aligned text container" style="padding-bottom: 25px">
     <table class="ui celled table" id="forumIndexTable">
         <tbody>
-            @foreach (var profile in Model.Profiles)
-            {
+        @foreach (var profile in Model)
+        {
             <tr>
                 <td class="collapsing">
                     <img class="ui small image" src="@profile.ProfileImageUrl" style="width:40px;height:40px;" />
                 </td>
                 <td class="collapsing" style="border-left: none">
-                    <a asp-contoller="Profile" asp-action="Detail" asp-route-id="@profile.UserId">@profile.UserName (@profile.UserRating) </a>
+                    <a asp-contoller="Profile" asp-action="Detail" asp-route-id="@profile.Id">@profile.UserName </a>
                 </td>
-                <td>
-                                    Post Count: @profile.PostCount
-                                    </td>
-                <td>
+                <td > 
                     Member since: @profile.MemberSince
                 </td>
+                <td>
+                    Rating: @profile.Rating
+                </td>
             </tr>
-            }
+        }
 
         </tbody>
     </table>
+    <nav>
+        <vc:pager paging-list="@Model"></vc:pager>
+    </nav>
 </div>

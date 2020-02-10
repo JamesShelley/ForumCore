@@ -75,6 +75,9 @@ namespace StopGambleProject.Controllers
                 Posts = postListings, 
                 Forum = BuildForumListing(forum)
             };
+
+            var item = _forumService.GetAll();
+            
             return View(model);
         }
 

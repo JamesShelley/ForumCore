@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage.Blob;
 using Project.Data;
 using Project.Data.Models;
-using Project.Web;
 using ReflectionIT.Mvc.Paging;
+using StopGambleProject.Data;
 using StopGambleProject.Models.ApplicationUser;
-using StopGambleProject.Models.Forum;
 using StopGambleProject.Models.Post;
 
 namespace StopGambleProject.Controllers
@@ -24,18 +23,21 @@ namespace StopGambleProject.Controllers
         private readonly IUpload _uploadService;
         private readonly IConfiguration _configuration;
         private readonly IPost _postService;
+        private readonly ApplicationDbContext _context;
 
-        public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration, IPost postService)
+
+        public  ProfileController(UserManager<ApplicationUser> userManager, IApplicationUser userService, IUpload upload, IConfiguration configuration, IPost postService, ApplicationDbContext context)
         {
             _userManager = userManager;
             _userService = userService;
             _uploadService = upload;
             _configuration = configuration;
             _postService = postService;
-        }
+            _context = context;
 
-        [Route("/Users/")]
-        public async Task<IActionResult> Index(int? pageNumber)
+        }
+        
+        public async Task<IActionResult> Index(int page = 1)
         {
             if(User.Identity.IsAuthenticated)
             {
@@ -55,13 +57,11 @@ namespace StopGambleProject.Controllers
                 {
                     Profiles = profiles
                 };
-               // PagingList.CreateAsync<T>()
-            //    var paginationView1 = await PagingList<ProfileModel>.CreateAsync(testModel, 10, page);
-                //var paginationView2 = await PagingList.CreateAsync<ProfileModel>(testModel, 10, page);
-               // return View(model);
-               int pageSize = 3;
-               return View(model);
-               //return View(await PaginatedList<ProfileModel>.CreateAsync(model, pageNumber ?? 1, pageSize));
+                
+                //TODO refractor this View Model instead of Data Model
+               var item = _context.ApplicationUsers.AsNoTracking().OrderBy(user => user.MemberSince);
+              var dataModel = await PagingList<ApplicationUser>.CreateAsync(item, 4, page);
+               return View(dataModel);
 
             } else
             {

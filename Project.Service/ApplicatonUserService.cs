@@ -29,6 +29,11 @@ namespace Project.Service
             return _context.ApplicationUsers;
         }
 
+        public IOrderedQueryable<ApplicationUser> PaginateUsers()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task SetProfileImage(string id, Uri uri)
         {
             var user = GetById(id);

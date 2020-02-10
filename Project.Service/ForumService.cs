@@ -37,6 +37,12 @@ namespace Project.Service
             //Return all posts in a Forum
             return _context.Forums.Include(Forum => Forum.Posts);
         }
+        
+        public IOrderedQueryable<Forum> PaginateTopics()
+        {
+            //Return all posts in a Forum
+            return _context.Forums.AsNoTracking().OrderBy(forum => forum.Created);
+        }
 
         public IEnumerable<ApplicationUser> GetActiveUsers(int id)
         {
